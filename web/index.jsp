@@ -247,7 +247,7 @@
                     </div>
                 </div>
                 <% } else { %>
-                <!-- Nếu chưa đăng nhập -->
+               
                 <a href="login.jsp" style="color: blue">Đăng Nhập /</a>
                 <a href="register.jsp" style="color: blue">Đăng Ký</a>
                 <% } %>
