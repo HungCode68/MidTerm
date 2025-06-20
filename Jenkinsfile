@@ -32,17 +32,18 @@ pipeline {
             }
         }
 
-        stage('Configure Port') {
-            steps {
-                echo "Changing Tomcat HTTP port to ${env.TOMCAT_PORT}"
-                bat """
-                    powershell -Command ^
-                    "$config = Get-Content -Raw '${env.TOMCAT_PATH}\\conf\\server.xml'; ^
-                     $config = $config -replace 'port=\\"[0-9]+\\" protocol=\\"HTTP/1.1\\"', 'port=\\"${env.TOMCAT_PORT}\\" protocol=\\"HTTP/1.1\\"'; ^
-                     Set-Content -Path '${env.TOMCAT_PATH}\\conf\\server.xml' -Value $config"
-                """
-            }
-        }
+      stage('Configure Port') {
+    steps {
+        echo "Changing Tomcat HTTP port to ${env.TOMCAT_PORT}"
+        bat """
+            powershell -Command ^
+            "\$config = Get-Content -Raw '${env.TOMCAT_PATH}\\conf\\server.xml'; ^
+             \$config = \$config -replace 'port=\\"[0-9]+\\" protocol=\\"HTTP/1.1\\"', 'port=\\"${env.TOMCAT_PORT}\\" protocol=\\"HTTP/1.1\\"'; ^
+             Set-Content -Path '${env.TOMCAT_PATH}\\conf\\server.xml' -Value \$config"
+        """
+    }
+}
+
 
         stage('Deploy to Tomcat') {
             steps {
