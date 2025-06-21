@@ -282,7 +282,7 @@
 
 <div class="service-container">
     <h1>Dịch vụ sửa chữa</h1>
-    <a href="booking.jsp">
+    <a href="/VinfastSystem/maintenance-booking">
         <button class="book-button">ĐẶT LỊCH DỊCH VỤ</button>
     </a>
     <div class="service-image">

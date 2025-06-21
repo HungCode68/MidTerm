@@ -13,7 +13,15 @@ import context.DBContext;
  * @author Nguyễn Hùng
  */
 public class MaintenanceServiceDAO {
-
+ private Connection conn;
+ 
+public MaintenanceServiceDAO(Connection conn) {
+    try {
+        this.conn = DBContext.getConnection(); // giả sử DBUtil.getConnection() của bạn hoạt động
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
     // Lấy tất cả dịch vụ bảo dưỡng
     public List<MaintenanceService> getAllServices() {
         List<MaintenanceService> list = new ArrayList<>();

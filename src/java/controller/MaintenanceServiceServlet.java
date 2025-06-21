@@ -4,6 +4,8 @@
  */
 package controller;
 
+import context.DBContext;
+import dao.CarDAO;
 import dao.MaintenanceServiceDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,9 +59,15 @@ private MaintenanceServiceDAO dao;
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+     @Override
     public void init() throws ServletException {
-        dao = new MaintenanceServiceDAO();
+        try {
+            // Giả sử bạn có class MyDatabase chứa method static getConnection()
+            // hoặc bạn tự inject Connection ở đây
+            dao = new MaintenanceServiceDAO(DBContext.getConnection()); // <-- THAY bằng class của bạn
+        } catch (Exception e) {
+            throw new ServletException("Không thể khởi tạo DAO", e);
+        }
     }
     
     @Override
