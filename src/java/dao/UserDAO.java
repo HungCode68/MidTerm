@@ -104,6 +104,65 @@ public class UserDAO {
         }
         return null;
     }
+    
+    public List<User> getAllUsers() {
+    List<User> users = new ArrayList<>();
+    String query = "SELECT * FROM Users";
+    try {
+        conn = DBContext.getConnection();
+        ps = conn.prepareStatement(query);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            users.add(extractUserFromResultSet(rs));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        closeAll();
+    }
+    return users;
+}
+    
+    public boolean updateUser(User user) {
+    String query = "UPDATE Users SET FullName = ?, PhoneNumber = ?, Email = ?, Role = ?, CCCD = ? WHERE UserId = ?";
+    try {
+        conn = DBContext.getConnection();
+        ps = conn.prepareStatement(query);
+        ps.setString(1, user.getFullName());
+        ps.setString(2, user.getPhoneNumber());
+        ps.setString(3, user.getEmail());
+        ps.setString(4, user.getRole());
+        ps.setString(5, user.getCccd());
+        ps.setInt(6, user.getUserId());
+
+        int rows = ps.executeUpdate();
+        return rows > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        closeAll();
+    }
+    return false;
+}
+
+    public boolean deleteUser(int userId) {
+    String query = "DELETE FROM Users WHERE UserId = ?";
+    try {
+        conn = DBContext.getConnection();
+        ps = conn.prepareStatement(query);
+        ps.setInt(1, userId);
+
+        int rows = ps.executeUpdate();
+        return rows > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        closeAll();
+    }
+    return false;
+}
+
+
 
     // Helper: Chuyển từ ResultSet sang User
     private User extractUserFromResultSet(ResultSet rs) throws SQLException {

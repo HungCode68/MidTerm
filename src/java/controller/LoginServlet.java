@@ -91,7 +91,7 @@ public class LoginServlet extends HttpServlet {
             
             // Điều hướng theo vai trò
             if ("Admin".equals(user.getRole())) {
-                response.sendRedirect("admin/dashboard.jsp");
+                response.sendRedirect("/VinfastSystem/dashboard");
             } else {
                 response.sendRedirect("index.jsp");
             }

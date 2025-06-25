@@ -3,8 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Code%20Java/VinfastSystem/web/index.html</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/CarServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/testdrive_form.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/dao/CarDAO.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/model/Car.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/dao/MaintenanceServiceDAO.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/dao/DepositDAO.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/consultation_form.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/dashboard.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/dao/ConsultationDAO.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/serviceinformation.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/dao/MaintenanceBookingDAO.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/ConsultationServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/car_dashboard.jsp</file>
             <file>file:/D:/Code%20Java/VinfastSystem/web/index.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/TestDriveServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/maintenance_booking_form.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/RegisterServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/DepositServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/register.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/login.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/index.html</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/UserManagementServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/MaintenanceServiceServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/LoginServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/CarManagementServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/profile.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/MaintenanceBookingServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/web/warrantyinformation.jsp</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/context/DBContext.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/controller/ProfileServlet.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/model/MaintenanceBooking.java</file>
+            <file>file:/D:/Code%20Java/VinfastSystem/src/java/model/MaintenanceService.java</file>
         </group>
     </open-files>
 </project-private>

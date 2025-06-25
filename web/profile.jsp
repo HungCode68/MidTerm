@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Deposit" %>
-
+<%@ page import="model.MaintenanceBooking" %>
 <%
     User user = (User) request.getAttribute("user");
       User currentUser = (User) session.getAttribute("currentUser");
@@ -339,6 +339,48 @@
     <p style="margin-top: 10px; font-size: 14px; color: #777;">Chưa có lịch sử đặt cọc nào.</p>
 <% } %>
 
+<%
+    List<MaintenanceBooking> maintenanceHistory = (List<MaintenanceBooking>) request.getAttribute("maintenanceHistory");
+    if (maintenanceHistory != null && !maintenanceHistory.isEmpty()) {
+%>
+<h2 style="margin-top: 40px; color: #333;">Lịch sử đặt lịch bảo dưỡng</h2>
+<table style="margin-top: 15px; width: 100%; font-size: 14px; border-collapse: collapse; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+    <thead>
+        <tr style="background-color: #2d7be5; color: white; text-align: center;">
+            <th style="padding: 10px;">STT</th>
+            <th style="padding: 10px;">Mẫu xe</th>
+            <th style="padding: 10px;">Biển số</th>
+            <th style="padding: 10px;">Số Km</th>
+            <th style="padding: 10px;">Tỉnh</th>
+            <th style="padding: 10px;">Quận/Huyện</th>
+            <th style="padding: 10px;">Thời gian hẹn</th>
+            <th style="padding: 10px;">Họ tên</th>
+            <th style="padding: 10px;">SĐT</th>
+        </tr>
+    </thead>
+    <tbody>
+    <%
+        int idx = 1;
+        for (MaintenanceBooking b : maintenanceHistory) {
+            String bgColor = (idx % 2 == 0) ? "#f9f9f9" : "#ffffff";
+    %>
+        <tr style="background-color: <%= bgColor %>;">
+            <td style="padding: 8px; text-align: center;"><%= idx++ %></td>
+            <td style="padding: 8px;"><%= b.getCarModel() %></td>
+            <td style="padding: 8px;"><%= b.getLicensePlate() %></td>
+            <td style="padding: 8px; text-align: center;"><%= b.getKilometer() %></td>
+            <td style="padding: 8px;"><%= b.getProvince() %></td>
+            <td style="padding: 8px;"><%= b.getDistrict() %></td>
+            <td style="padding: 8px;"><%= sdf.format(b.getScheduledTime()) %></td>
+            <td style="padding: 8px;"><%= b.getFullName() %></td>
+            <td style="padding: 8px;"><%= b.getPhoneNumber() %></td>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
+<% } else { %>
+    <p style="margin-top: 10px; font-size: 14px; color: #777;">Chưa có lịch sử đặt lịch bảo dưỡng nào.</p>
+<% } %>
 
                 
 <% } %>

@@ -3,9 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
+
 import dao.DepositDAO;
+import dao.MaintenanceBookingDAO;
 import dao.UserDAO;
 import model.User;
+import context.DBContext;
+import java.sql.Connection;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,6 +24,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Deposit;
+import model.MaintenanceBooking;
 
 /**
  *
@@ -27,7 +32,9 @@ import model.Deposit;
  */
 @WebServlet(name = "ProfileServlet", urlPatterns = {"/profile"})
 public class ProfileServlet extends HttpServlet {
- private UserDAO userDAO;
+
+    private UserDAO userDAO;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +52,7 @@ public class ProfileServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProfileServlet</title>");            
+            out.println("<title>Servlet ProfileServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProfileServlet at " + request.getContextPath() + "</h1>");
@@ -63,37 +70,48 @@ public class ProfileServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     @Override
+    @Override
     public void init() {
         userDAO = new UserDAO();
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // Lấy thông tin user từ session
-    HttpSession session = request.getSession();
-    User currentUser = (User) session.getAttribute("currentUser");
+        // Lấy thông tin user từ session
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("currentUser");
 
-    if (currentUser == null) {
-        // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
-        response.sendRedirect("login.jsp");
-        return;
-    }
+        if (currentUser == null) {
+            // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            response.sendRedirect("login.jsp");
+            return;
+        }
 
-    // Lấy thông tin chi tiết user từ DB bằng ID (đảm bảo dữ liệu mới nhất)
-    User fullUserInfo = userDAO.getUserById(currentUser.getUserId());
+        // Lấy thông tin chi tiết user từ DB bằng ID (đảm bảo dữ liệu mới nhất)
+        User fullUserInfo = userDAO.getUserById(currentUser.getUserId());
 
-    // Lấy danh sách lịch sử đặt cọc từ DB
-    DepositDAO depositDAO = new DepositDAO();
-    List<Deposit> depositHistory = depositDAO.getDepositsByUserId(currentUser.getUserId());
+        // Lấy danh sách lịch sử đặt cọc từ DB
+        DepositDAO depositDAO = new DepositDAO();
+        List<Deposit> depositHistory = depositDAO.getDepositsByUserId(currentUser.getUserId());
 
-    // Gán vào request để gửi sang JSP
-    request.setAttribute("user", fullUserInfo);
-    request.setAttribute("depositHistory", depositHistory);
+        // Lấy danh sách lịch sử đặt lịch bảo dưỡng
+        try {
+            Connection conn = new DBContext().getConnection();
+            MaintenanceBookingDAO maintenanceBookingDAO = new MaintenanceBookingDAO(conn);
+            List<MaintenanceBooking> maintenanceHistory = maintenanceBookingDAO.getBookingsByUserId(currentUser.getUserId());
+            request.setAttribute("maintenanceHistory", maintenanceHistory);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("maintenanceHistory", null);
+        }
 
-    // Điều hướng sang profile.jsp
-    request.getRequestDispatcher("profile.jsp").forward(request, response);
+        // Gán vào request để gửi sang JSP
+        request.setAttribute("user", fullUserInfo);
+        request.setAttribute("depositHistory", depositHistory);
+
+        // Điều hướng sang profile.jsp
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
 
     }
 
