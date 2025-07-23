@@ -33,8 +33,6 @@ pipeline {
                     cd build
                     jar -cvf VinfastSystem.war *
                     cd ..
-		    if not exist dist mkdir dist
-		    copy build\\VinfastSystem.war dist\\VinfastSystem.war
                 '''
             }
         }
