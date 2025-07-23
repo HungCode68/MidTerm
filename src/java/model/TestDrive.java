@@ -10,7 +10,7 @@ import java.sql.Timestamp;
  */
 public class TestDrive {
     private int testDriveId;
-    private int userId;
+    private Integer userId;
     private int carId;
     private String fullName;
     private String phoneNumber;
@@ -18,11 +18,12 @@ public class TestDrive {
     private String address;
     private Timestamp scheduledTime;
     private Timestamp createdAt;
+    private String carName;
 
     public TestDrive() {
     }
 
-    public TestDrive(int testDriveId, int userId, int carId, String fullName, String phoneNumber,
+    public TestDrive(int testDriveId, Integer userId, int carId, String fullName, String phoneNumber,
                      String province, String address, Timestamp scheduledTime, Timestamp createdAt) {
         this.testDriveId = testDriveId;
         this.userId = userId;
@@ -44,11 +45,11 @@ public class TestDrive {
         this.testDriveId = testDriveId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -107,4 +108,11 @@ public class TestDrive {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+    
+    public String getCarName() {
+    return carName;
+}
+public void setCarName(String carName) {
+    this.carName = carName;
+}
 }

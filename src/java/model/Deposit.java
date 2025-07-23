@@ -3,14 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.sql.Timestamp;
+
 /**
  *
  * @author Nguyễn Hùng
  */
 public class Deposit {
+
     private int depositId;
-    private int userId;
+    private Integer userId;
     private int carId;
     private String colorExterior;
     private String colorInterior;
@@ -21,13 +24,18 @@ public class Deposit {
     private int showroomId;
     private String paymentMethod;
     private Timestamp depositDate;
+    private String status;
+    private String carName;
+    private String showroomName;
+    private String userName;
 
     // Constructors
-    public Deposit() {}
+    public Deposit() {
+    }
 
-    public Deposit(int depositId, int userId, int carId, String colorExterior, String colorInterior,
-                   String fullName, String phoneNumber, String cccd, String province,
-                   int showroomId, String paymentMethod, Timestamp depositDate) {
+    public Deposit(int depositId, Integer userId, int carId, String colorExterior, String colorInterior,
+            String fullName, String phoneNumber, String cccd, String province,
+            int showroomId, String paymentMethod, Timestamp depositDate, String status) {
         this.depositId = depositId;
         this.userId = userId;
         this.carId = carId;
@@ -40,6 +48,7 @@ public class Deposit {
         this.showroomId = showroomId;
         this.paymentMethod = paymentMethod;
         this.depositDate = depositDate;
+        this.status = status;
     }
 
     // Getters and Setters
@@ -51,11 +60,11 @@ public class Deposit {
         this.depositId = depositId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -138,4 +147,37 @@ public class Deposit {
     public void setDepositDate(Timestamp depositDate) {
         this.depositDate = depositDate;
     }
+
+    public String getStatus() { // ✅ getter cho status
+        return status;
+    }
+
+    public void setStatus(String status) { // ✅ setter cho status
+        this.status = status;
+    }
+
+    public String getCarName() {
+        return carName;
+    }
+
+    public void setCarName(String carName) {
+        this.carName = carName;
+    }
+
+    public String getShowroomName() {
+        return showroomName;
+    }
+
+    public void setShowroomName(String showroomName) {
+        this.showroomName = showroomName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }

@@ -3,14 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.sql.Timestamp;
+
 /**
  *
  * @author Nguyễn Hùng
  */
 public class MaintenanceBooking {
+
     private int bookingId;
-    private int userId;
+    private Integer userId;
     private String carModel;
     private String licensePlate;
     private int kilometer;
@@ -21,13 +24,16 @@ public class MaintenanceBooking {
     private Timestamp createdAt;
     private String phoneNumber;
     private String fullName;
+    private String status;
+    private String serviceName;
 
     // Constructors
-    public MaintenanceBooking() {}
+    public MaintenanceBooking() {
+    }
 
-    public MaintenanceBooking(int bookingId, int userId, String carModel, String licensePlate,
-                              int kilometer, int serviceId, String province, String district,
-                              Timestamp scheduledTime, Timestamp createdAt, String phoneNumber, String fullName) {
+    public MaintenanceBooking(int bookingId, Integer userId, String carModel, String licensePlate,
+            int kilometer, int serviceId, String province, String district,
+            Timestamp scheduledTime, Timestamp createdAt, String phoneNumber, String fullName, String status) {
         this.bookingId = bookingId;
         this.userId = userId;
         this.carModel = carModel;
@@ -40,6 +46,9 @@ public class MaintenanceBooking {
         this.createdAt = createdAt;
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
+        this.status = status;
+       
+
     }
 
     // Getters and Setters
@@ -51,11 +60,11 @@ public class MaintenanceBooking {
         this.bookingId = bookingId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -138,4 +147,21 @@ public class MaintenanceBooking {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
 }

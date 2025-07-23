@@ -79,49 +79,53 @@ public class DepositServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            // Kiểm tra người dùng đã đăng nhập chưa
-            HttpSession session = request.getSession(false);
-            User currentUser = (User) session.getAttribute("currentUser");
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    try {
+        // Kiểm tra người dùng đã đăng nhập chưa
+        HttpSession session = request.getSession(false);
+        User currentUser = (User) session.getAttribute("currentUser");
 
-            if (currentUser == null) {
-                response.sendRedirect("login.jsp?message=login_required");
-                return;
-            }
-
-            // Lấy dữ liệu từ form
-            int userId = currentUser.getUserId();
-            int carId = Integer.parseInt(request.getParameter("carId"));
-            String colorExterior = request.getParameter("colorExterior");
-            String colorInterior = request.getParameter("colorInterior");
-            String fullName = request.getParameter("fullName");
-            String phoneNumber = request.getParameter("phoneNumber");
-            String cccd = request.getParameter("cccd");
-            String province = request.getParameter("province");
-            int showroomId = Integer.parseInt(request.getParameter("showroomId"));
-            String paymentMethod = request.getParameter("paymentMethod");
-
-            // Tạo đối tượng deposit
-            Deposit deposit = new Deposit(0, userId, carId, colorExterior, colorInterior,
-                    fullName, phoneNumber, cccd, province, showroomId, paymentMethod, new Timestamp(System.currentTimeMillis()));
-
-            // Lưu vào DB
-            depositDAO.insertDeposit(deposit);
-
-            // Redirect về form với thông báo thành công
-            response.sendRedirect("deposit_form.jsp?success=true&carId=" + carId);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Forward lại form với thông báo lỗi
-            request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đặt cọc: " + e.getMessage());
-            request.getRequestDispatcher("deposit_form.jsp").forward(request, response);
+        if (currentUser == null) {
+            response.sendRedirect("login.jsp?message=login_required");
+            return;
         }
-    
+
+        // Lấy dữ liệu từ form
+        int userId = currentUser.getUserId();
+        int carId = Integer.parseInt(request.getParameter("carId"));
+        String colorExterior = request.getParameter("colorExterior");
+        String colorInterior = request.getParameter("colorInterior");
+        String fullName = request.getParameter("fullName");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String cccd = request.getParameter("cccd");
+        String province = request.getParameter("province");
+        int showroomId = Integer.parseInt(request.getParameter("showroomId"));
+        String paymentMethod = request.getParameter("paymentMethod");
+        String status = "pending"; // Thêm trạng thái mặc định
+
+        // Tạo đối tượng deposit
+        Deposit deposit = new Deposit(
+            0, userId, carId, colorExterior, colorInterior,
+            fullName, phoneNumber, cccd, province,
+            showroomId, paymentMethod, new Timestamp(System.currentTimeMillis()),
+            status
+        );
+
+        // Lưu vào DB
+        depositDAO.insertDeposit(deposit);
+
+        // Redirect về form với thông báo thành công
+        response.sendRedirect("deposit_form.jsp?success=true&carId=" + carId);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        // Forward lại form với thông báo lỗi
+        request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đặt cọc: " + e.getMessage());
+        request.getRequestDispatcher("deposit_form.jsp").forward(request, response);
     }
+}
+
 
     /**
      * Returns a short description of the servlet.

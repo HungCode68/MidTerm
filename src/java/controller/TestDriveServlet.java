@@ -29,7 +29,9 @@ import model.User;
  */
 @WebServlet(name = "TestDriveServlet", urlPatterns = {"/testdrives"})
 public class TestDriveServlet extends HttpServlet {
-private TestDriveDAO testDriveDAO;
+
+    private TestDriveDAO testDriveDAO;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,7 +49,7 @@ private TestDriveDAO testDriveDAO;
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TestDriveServlet</title>");            
+            out.println("<title>Servlet TestDriveServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet TestDriveServlet at " + request.getContextPath() + "</h1>");
@@ -65,7 +67,7 @@ private TestDriveDAO testDriveDAO;
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-       @Override
+    @Override
     public void init() throws ServletException {
         try {
             Connection conn = (Connection) new DBContext().getConnection();
@@ -74,11 +76,11 @@ private TestDriveDAO testDriveDAO;
             throw new ServletException("Không thể kết nối DB", e);
         }
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
+        try {
             List<TestDrive> list = testDriveDAO.getAllTestDrives();
             request.setAttribute("testDrives", list);
             request.getRequestDispatcher("testdrive_form.jsp").forward(request, response);
@@ -95,41 +97,37 @@ private TestDriveDAO testDriveDAO;
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
- @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    try {
-        User currentUser = (User) request.getSession().getAttribute("currentUser");
-if (currentUser == null) {
-    response.sendRedirect("login.jsp?message=login_required");
-    return;
-}
-int userId = currentUser.getUserId();
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            User currentUser = (User) request.getSession().getAttribute("currentUser");
+            if (currentUser == null) {
+                response.sendRedirect("login.jsp?message=login_required");
+                return;
+            }
+            int userId = currentUser.getUserId();
 
+            int carId = Integer.parseInt(request.getParameter("carId"));
+            String fullName = request.getParameter("fullName");
+            String phoneNumber = request.getParameter("phoneNumber");
+            String province = request.getParameter("province");
+            String address = request.getParameter("address");
+            String scheduledTimeStr = request.getParameter("scheduledTime");
 
-        int carId = Integer.parseInt(request.getParameter("carId"));
-        String fullName = request.getParameter("fullName");
-        String phoneNumber = request.getParameter("phoneNumber");
-        String province = request.getParameter("province");
-        String address = request.getParameter("address");
-        String scheduledTimeStr = request.getParameter("scheduledTime");
+            Timestamp scheduledTime = Timestamp.valueOf(scheduledTimeStr.replace("T", " ") + ":00");
 
-        Timestamp scheduledTime = Timestamp.valueOf(scheduledTimeStr.replace("T", " ") + ":00");
+            TestDrive td = new TestDrive(0, userId, carId, fullName, phoneNumber, province, address, scheduledTime, null);
+            testDriveDAO.insertTestDrive(td);
 
-        TestDrive td = new TestDrive(0, userId, carId, fullName, phoneNumber, province, address, scheduledTime, null);
-        testDriveDAO.insertTestDrive(td);
+            response.sendRedirect("testdrive_form.jsp?success=true");
 
-        response.sendRedirect("testdrive_form.jsp?success=true");
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đăng ký: " + e.getMessage());
-        request.getRequestDispatcher("testdrive_form.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đăng ký: " + e.getMessage());
+            request.getRequestDispatcher("testdrive_form.jsp").forward(request, response);
+        }
     }
-}
-
-
-
 
     /**
      * Returns a short description of the servlet.
