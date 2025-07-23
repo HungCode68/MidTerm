@@ -94,7 +94,8 @@ pipeline {
                         error "❌ Port 8087 is already in use. Please free the port before retrying."
                     }
 
-                    bat "docker run -d --name ${CONTAINER_NAME} -p 8087:8081 ${IMAGE_NAME}:${IMAGE_TAG}"
+                    bat "docker run -d --name ${CONTAINER_NAME} --network vinfast-network -p 8087:8081 ${IMAGE_NAME}:${IMAGE_TAG}"
+
                 }
             }
         }
