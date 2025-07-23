@@ -65,7 +65,7 @@ public class CarManagementServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            // Giả sử bạn có class MyDatabase chứa method static getConnection()
+           
             // hoặc bạn tự inject Connection ở đây
             carDAO = new CarDAO(DBContext.getConnection()); // <-- THAY bằng class của bạn
         } catch (Exception e) {
