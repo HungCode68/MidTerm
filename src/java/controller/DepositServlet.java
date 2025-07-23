@@ -82,7 +82,7 @@ public class DepositServlet extends HttpServlet {
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     try {
-        // Kiểm tra người dùng đã đăng nhập chưa
+        
         HttpSession session = request.getSession(false);
         User currentUser = (User) session.getAttribute("currentUser");
 
