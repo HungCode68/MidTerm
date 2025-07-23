@@ -66,7 +66,7 @@ public class CarManagementServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
            
-            // hoặc bạn tự inject Connection ở đây
+            
             carDAO = new CarDAO(DBContext.getConnection()); // <-- THAY bằng class của bạn
         } catch (Exception e) {
             throw new ServletException("Không thể khởi tạo DAO", e);
