@@ -96,7 +96,6 @@ pipeline {
 
                    bat "docker run -d --name ${CONTAINER_NAME} -p 8087:8081 ${IMAGE_NAME}:${IMAGE_TAG}"
 
-
                 }
             }
         }
