@@ -7,7 +7,7 @@ RUN rm -rf /usr/local/tomcat/webapps/*
  RUN sed -i 's/port="8080"/port="8081"/' /usr/local/tomcat/conf/server.xml
 
 # Copy WAR đã build vào Tomcat (ROOT.war)
-COPY build/VinfastSystem.war /usr/local/tomcat/webapps/ROOT.war
+COPY dist/VinfastSystem.war /usr/local/tomcat/webapps/ROOT.war
 
 # Expose cổng nội bộ (8081)
 EXPOSE 8081
