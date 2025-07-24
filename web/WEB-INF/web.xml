@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+<web-app xmlns="http://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://jakarta.ee/xml/ns/jakartaee
+         http://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <!-- Định nghĩa servlet Login -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controller.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Định nghĩa RegisterServlet -->
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>controller.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    
+    <!-- CarServlet -->
+    <servlet>
+        <servlet-name>CarServlet</servlet-name>
+        <servlet-class>controller.CarServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CarServlet</servlet-name>
+        <url-pattern>/cars</url-pattern>
+    </servlet-mapping>
+    
+    <!-- ConsultationServlet -->
+    <servlet>
+        <servlet-name>ConsultationServlet</servlet-name>
+        <servlet-class>controller.ConsultationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConsultationServlet</servlet-name>
+        <url-pattern>/consultations</url-pattern>
+    </servlet-mapping>
+    
+    <!-- DepositServlet -->
+    <servlet>
+        <servlet-name>DepositServlet</servlet-name>
+        <servlet-class>controller.DepositServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DepositServlet</servlet-name>
+        <url-pattern>/deposit</url-pattern>
+    </servlet-mapping>
+    
+    <!-- MaintenanceBookingServlet -->
+    <servlet>
+        <servlet-name>MaintenanceBookingServlet</servlet-name>
+        <servlet-class>controller.MaintenanceBookingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MaintenanceBookingServlet</servlet-name>
+        <url-pattern>/maintenance-booking</url-pattern>
+    </servlet-mapping>
+    
+    <!-- MaintenanceServiceServlet -->
+    <servlet>
+        <servlet-name>MaintenanceServiceServlet</servlet-name>
+        <servlet-class>controller.MaintenanceServiceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MaintenanceServiceServlet</servlet-name>
+        <url-pattern>/maintenance</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>controller.ProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TestDriveServlet</servlet-name>
+        <servlet-class>controller.TestDriveServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TestDriveServlet</servlet-name>
+        <url-pattern>/testdrives</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>CarManagementServlet</servlet-name>
+        <servlet-class>controller.CarManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CarManagementServlet</servlet-name>
+        <url-pattern>/dashboard-cars</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarManagementServlet</servlet-name>
+        <url-pattern>/add-car</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarManagementServlet</servlet-name>
+        <url-pattern>/edit-car</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CarManagementServlet</servlet-name>
+        <url-pattern>/delete-car</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ConsultationManagementServlet</servlet-name>
+        <servlet-class>controller.ConsultationManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ConsultationManagementServlet</servlet-name>
+        <url-pattern>/dashboard-consultations</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ConsultationManagementServlet</servlet-name>
+        <url-pattern>/add-consultation</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ConsultationManagementServlet</servlet-name>
+        <url-pattern>/edit-consultation</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ConsultationManagementServlet</servlet-name>
+        <url-pattern>/delete-consultation</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>DepositManagementServlet</servlet-name>
+        <servlet-class>controller.DepositManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DepositManagementServlet</servlet-name>
+        <url-pattern>/dashboard-deposits</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DepositManagementServlet</servlet-name>
+        <url-pattern>/add-deposit</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DepositManagementServlet</servlet-name>
+        <url-pattern>/edit-deposit</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DepositManagementServlet</servlet-name>
+        <url-pattern>/delete-deposit</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>MaintenanceBookingManagementServlet</servlet-name>
+        <servlet-class>controller.MaintenanceBookingManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceBookingManagementServlet</servlet-name>
+        <url-pattern>/dashboard-bookings</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceBookingManagementServlet</servlet-name>
+        <url-pattern>/add-booking</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceBookingManagementServlet</servlet-name>
+        <url-pattern>/edit-booking</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceBookingManagementServlet</servlet-name>
+        <url-pattern>/delete-booking</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>MaintenanceServicesManagementServlet</servlet-name>
+        <servlet-class>controller.MaintenanceServicesManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceServicesManagementServlet</servlet-name>
+        <url-pattern>/dashboard-maintenance-services</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceServicesManagementServlet</servlet-name>
+        <url-pattern>/add-maintenance-service</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceServicesManagementServlet</servlet-name>
+        <url-pattern>/edit-maintenance-service</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MaintenanceServicesManagementServlet</servlet-name>
+        <url-pattern>/delete-maintenance-service</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ServiceInvoiceManagementServlet</servlet-name>
+        <servlet-class>controller.ServiceInvoiceManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServiceInvoiceManagementServlet</servlet-name>
+        <url-pattern>/dashboard-invoices</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ServiceInvoiceManagementServlet</servlet-name>
+        <url-pattern>/add-invoice</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ServiceInvoiceManagementServlet</servlet-name>
+        <url-pattern>/edit-invoice</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ServiceInvoiceManagementServlet</servlet-name>
+        <url-pattern>/delete-invoice</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ServiceInvoiceManagementServlet</servlet-name>
+        <url-pattern>/filter-invoice</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ShowroomManagementServlet</servlet-name>
+        <servlet-class>controller.ShowroomManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ShowroomManagementServlet</servlet-name>
+        <url-pattern>/dashboard-showrooms</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ShowroomManagementServlet</servlet-name>
+        <url-pattern>/add-showroom</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ShowroomManagementServlet</servlet-name>
+        <url-pattern>/edit-showroom</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ShowroomManagementServlet</servlet-name>
+        <url-pattern>/delete-showroom</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>StatisticsManagementServlet</servlet-name>
+        <servlet-class>controller.StatisticsManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>StatisticsManagementServlet</servlet-name>
+        <url-pattern>/StatisticsManagementServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>TestDriveManagementServlet</servlet-name>
+        <servlet-class>controller.TestDriveManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TestDriveManagementServlet</servlet-name>
+        <url-pattern>/dashboard-testdrives</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestDriveManagementServlet</servlet-name>
+        <url-pattern>/add-testdrives</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestDriveManagementServlet</servlet-name>
+        <url-pattern>/edit-testdrives</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestDriveManagementServlet</servlet-name>
+        <url-pattern>/delete-testdrives</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <servlet-class>controller.UserManagementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <url-pattern>/add-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <url-pattern>/edit-user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagementServlet</servlet-name>
+        <url-pattern>/delete-user</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!-- Trang mặc định khi vào / -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>
+
