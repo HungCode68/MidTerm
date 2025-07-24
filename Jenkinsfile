@@ -30,7 +30,6 @@ pipeline {
                         src\\context\\*.java
                     
                     xcopy Web\\* build /E /I /Y
-		    xcopy Web\WEB-INF\* build\WEB-INF\ /E /I /Y
                     cd build
                     jar -cvf VinfastSystem.war *
                     cd ..
