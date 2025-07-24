@@ -33,6 +33,7 @@ pipeline {
                     cd build
                     jar -cvf VinfastSystem.war *
                     cd ..
+		    del /f /q dist\\VinfastSystem.war
 		    copy build\\VinfastSystem.war dist\\VinfastSystem.war
 
                 '''
