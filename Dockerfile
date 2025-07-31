@@ -3,6 +3,9 @@ FROM tomcat:10.1.41-jdk21
 # Xóa ứng dụng mặc định
 RUN rm -rf /usr/local/tomcat/webapps/*
 
+RUN sed -i 's/port="8080"/port="8081"/' /usr/local/tomcat/conf/server.xml
+
+
 # Cấu hình JVM và database connection
 ENV CATALINA_OPTS="-Ddb.host=host.docker.internal -Xms512m -Xmx1024m -Djava.awt.headless=true"
 
