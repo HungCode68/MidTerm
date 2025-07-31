@@ -149,27 +149,28 @@ pipeline {
             steps {
                 echo '🚀 Deploying to local Tomcat for testing...'
                 bat '''
-                    REM Stop Tomcat gracefully
-                    taskkill /f /im java.exe /fi "WINDOWTITLE eq Tomcat" 2>nul || echo "Tomcat not running"
-                    timeout /t 5
-                    
-                    REM Clean old deployment
-                    if exist "%TOMCAT_PATH%\\webapps\\VinfastSystem*" (
-                        rmdir /s /q "%TOMCAT_PATH%\\webapps\\VinfastSystem" 2>nul
-                        del "%TOMCAT_PATH%\\webapps\\VinfastSystem.war" 2>nul
-                    )
-                    
-                    REM Deploy new WAR
-                    copy dist\\VinfastSystem.war "%TOMCAT_PATH%\\webapps\\" /Y
-                    
-                    REM Start Tomcat
-                    start "" "%TOMCAT_PATH%\\bin\\startup.bat"
-                    
-                    echo "⏳ Waiting for Tomcat to start..."
-                    timeout /t 15
-                    
-                    echo "✅ Local deployment completed"
-                '''
+    REM Stop Tomcat gracefully
+    taskkill /f /im java.exe /fi "WINDOWTITLE eq Tomcat" 2>nul || echo "Tomcat not running"
+    ping -n 6 127.0.0.1 > nul
+
+    REM Clean old deployment
+    if exist "%TOMCAT_PATH%\\webapps\\VinfastSystem*" (
+        rmdir /s /q "%TOMCAT_PATH%\\webapps\\VinfastSystem" 2>nul
+        del "%TOMCAT_PATH%\\webapps\\VinfastSystem.war" 2>nul
+    )
+
+    REM Deploy new WAR
+    copy dist\\VinfastSystem.war "%TOMCAT_PATH%\\webapps\\" /Y
+
+    REM Start Tomcat
+    start "" "%TOMCAT_PATH%\\bin\\startup.bat"
+
+    echo "⏳ Waiting for Tomcat to start..."
+    ping -n 16 127.0.0.1 > nul
+
+    echo "✅ Local deployment completed"
+'''
+
             }
         }
 
