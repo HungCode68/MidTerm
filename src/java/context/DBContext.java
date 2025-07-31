@@ -11,7 +11,7 @@ import java.sql.DriverManager;
  */
 public class DBContext {
     
-    // Database configuration với fallback values
+    
     private static final String DB_HOST = System.getProperty("db.host", detectHost());
     private static final String DB_PORT = "1433";
     private static final String DB_NAME = "VinfastSystem";
