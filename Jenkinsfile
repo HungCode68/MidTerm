@@ -91,36 +91,38 @@ pipeline {
             }
         }
 
-        stage('⚙️ Compile Java') {
-            steps {
-                echo '⚙️ Compiling Java source files...'
-                bat '''
-                    REM Build classpath with all JARs
-                    SET CLASSPATH=%TOMCAT_PATH%\\lib\\servlet-api.jar
-                    for %%i in (build\\WEB-INF\\lib\\*.jar) do (
-                        SET CLASSPATH=!CLASSPATH!;%%i
-                    )
-                    
-                    echo "🔧 Classpath: %CLASSPATH%"
-                    
-                    REM Compile all Java files
-                    javac -d build\\WEB-INF\\classes -cp "%CLASSPATH%" -sourcepath src ^
-                        src\\context\\*.java ^
-                        src\\model\\*.java ^
-                        src\\dao\\*.java ^
-                        src\\controller\\*.java
-                    
-                    if errorlevel 1 (
-                        echo "❌ Compilation failed!"
-                        exit /b 1
-                    ) else (
-                        echo "✅ Compilation successful"
-                        echo "📋 Compiled classes:"
-                        dir build\\WEB-INF\\classes /S /B
-                    )
-                '''
-            }
-        }
+       stage('⚙️ Compile Java') {
+    steps {
+        echo '⚙️ Compiling Java source files...'
+        bat '''
+            @echo off
+            setlocal enabledelayedexpansion
+
+            REM Build classpath with all JARs
+            set CLASSPATH=%TOMCAT_PATH%\\lib\\servlet-api.jar
+            for %%i in (build\\WEB-INF\\lib\\*.jar) do (
+                set CLASSPATH=!CLASSPATH!;%%i
+            )
+            echo 🔧 Classpath: !CLASSPATH!
+
+            REM Find all .java files recursively under src\\
+            dir /b /s src\\*.java > sources.txt
+
+            REM Compile all Java files from list
+            javac -d build\\WEB-INF\\classes -cp "!CLASSPATH!" @sources.txt
+
+            if errorlevel 1 (
+                echo ❌ Compilation failed!
+                exit /b 1
+            ) else (
+                echo ✅ Compilation successful
+                echo 📋 Compiled classes:
+                dir build\\WEB-INF\\classes /S /B
+            )
+        '''
+    }
+}
+
 
         stage('📦 Create WAR') {
             steps {
