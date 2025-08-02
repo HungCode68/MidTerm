@@ -188,6 +188,7 @@ stage('📊 Start Monitoring Stack') {
     steps {
         echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
         bat '''
+	    docker-compose -f docker-compose.yml down || echo "No existing monitoring stack"
             docker-compose -f docker-compose.yml up -d prometheus grafana node-exporter cadvisor
             echo "⏳ Waiting for monitoring containers to stabilize..."
             timeout /t 10 > nul
