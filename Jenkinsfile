@@ -188,22 +188,14 @@ stage('📊 Start Monitoring Stack') {
     steps {
         echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
         bat '''
-            echo "🧹 Cleaning up old monitoring containers..."
-            docker-compose -f docker-compose.yml down || echo "No existing containers to stop"
-
-            echo "🚀 Starting fresh monitoring stack..."
             docker-compose -f docker-compose.yml up -d prometheus grafana node-exporter cadvisor
-
             echo "⏳ Waiting for monitoring containers to stabilize..."
             timeout /t 10 > nul
-
             echo "📋 Active monitoring containers:"
             docker ps --filter "name=prometheus" --filter "name=grafana" --filter "name=node-exporter" --filter "name=cadvisor"
         '''
     }
 }
-
-
 
         stage('🛑 Stop Previous Container') {
             steps {
