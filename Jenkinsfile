@@ -184,6 +184,13 @@ pipeline {
             }
         }
 
+ stage('📊 Start Monitoring Stack') {
+            steps {
+                echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
+                bat 'docker-compose -f docker-compose.yml up -d prometheus grafana node-exporter cadvisor'
+            }
+        }
+
         stage('🛑 Stop Previous Container') {
             steps {
                 echo '🛑 Cleaning up previous container...'
@@ -215,7 +222,7 @@ pipeline {
                     
                     // Run container with proper network configuration
                     bat """docker run -d --name ${CONTAINER_NAME} \
-                           -p 8087:8081 \
+                           -p 8087:8081 -p 8082:8082 -p 9999:9999 \
                            --add-host=host.docker.internal:host-gateway \
                            -e "CATALINA_OPTS=-Ddb.host=host.docker.internal -Xms512m -Xmx1024m" \
                            ${IMAGE_NAME}:${IMAGE_TAG}"""

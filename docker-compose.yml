@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  # VinfastSystem Application - kết nối đến SQL Server trên host
+  vinfastsystem:
+    build: .
+    container_name: vinfastsystem_app
+    environment:
+      # Sử dụng database có sẵn trên host
+      - CATALINA_OPTS=-Ddb.host=host.docker.internal -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 -Xms512m -Xmx1024m -javaagent:/opt/jmx_prometheus_javaagent.jar=8082:/opt/jmx_config.yml
+    ports:
+      - "8087:8081"   # Application port
+      - "8082:8082"   # JMX metrics port
+      - "9999:9999"   # JMX remote port
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - vinfast_network
+    restart: unless-stopped
+    volumes:
+      - app_logs:/usr/local/tomcat/logs
+
+  # Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: vinfastsystem_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - vinfast_network
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: vinfastsystem_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+    networks:
+      - vinfast_network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # Node Exporter for system metrics
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: vinfastsystem_node_exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($|/)'
+    networks:
+      - vinfast_network
+    restart: unless-stopped
+
+  # cAdvisor for container metrics
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: vinfastsystem_cadvisor
+    ports:
+      - "8090:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    devices:
+      - /dev/kmsg
+    networks:
+      - vinfast_network
+    restart: unless-stopped
+
+networks:
+  vinfast_network:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  app_logs:
