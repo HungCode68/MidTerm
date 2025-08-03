@@ -22,15 +22,11 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
 
-  # Monitor Java Application JMX metrics
-  - job_name: 'vinfastsystem'
-    static_configs:
-      - targets: ['vinfastsystem:8082']  # JMX metrics port
-    metrics_path: /metrics
-    scrape_interval: 5s
+  # BỎ job 'vinfastsystem' vì không còn HTTP metrics endpoint
+  # JMX monitoring sẽ thông qua JConsole/VisualVM kết nối tới port 9999
 
-  # Monitor SQL Server (nếu có SQL Server exporter)
-  - job_name: 'sqlserver'
-    static_configs:
-      - targets: ['host.docker.internal:1433']  # SQL Server exporter port
-    scrape_interval: 30s
+  # BỎ SQL Server job (nếu không có SQL Server exporter riêng)
+  # - job_name: 'sqlserver'
+  #   static_configs:
+  #     - targets: ['host.docker.internal:1433']
+  #   scrape_interval: 30s

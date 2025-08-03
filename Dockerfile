@@ -6,17 +6,11 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 # Thay đổi port Tomcat
 RUN sed -i 's/port="8080"/port="8081"/' /usr/local/tomcat/conf/server.xml
 
-# Download JMX Prometheus Java Agent
-ADD https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.19.0/jmx_prometheus_javaagent-0.19.0.jar /opt/jmx_prometheus_javaagent.jar
-
-# Copy JMX config
-COPY monitoring/jmx/jmx_config.yml /opt/jmx_config.yml
-
-# Cấu hình JVM với database connection VÀ JMX monitoring
+# BỎ JMX Prometheus Agent - chỉ giữ JMX remote
+# Cấu hình JVM với database connection và JMX monitoring đơn giản
 ENV CATALINA_OPTS="-Ddb.host=host.docker.internal \
     -Xms512m -Xmx1024m \
     -Djava.awt.headless=true \
-    -javaagent:/opt/jmx_prometheus_javaagent.jar=8082:/opt/jmx_config.yml \
     -Dcom.sun.management.jmxremote \
     -Dcom.sun.management.jmxremote.port=9999 \
     -Dcom.sun.management.jmxremote.authenticate=false \
@@ -25,18 +19,18 @@ ENV CATALINA_OPTS="-Ddb.host=host.docker.internal \
 # Copy WAR file
 COPY dist/VinfastSystem.war /usr/local/tomcat/webapps/ROOT.war
 
-# Tạo script startup để log thông tin (cập nhật với JMX info)
+# Tạo script startup với thông tin đã cập nhật
 RUN echo '#!/bin/bash' > /usr/local/tomcat/bin/startup-custom.sh && \
-    echo 'echo "🚀 Starting VinfastSystem Application with Monitoring"' >> /usr/local/tomcat/bin/startup-custom.sh && \
+    echo 'echo "🚀 Starting VinfastSystem Application with JMX Monitoring"' >> /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'echo "🔗 Database Host: host.docker.internal"' >> /usr/local/tomcat/bin/startup-custom.sh && \
-    echo 'echo "📊 JMX Metrics: http://localhost:8082/metrics"' >> /usr/local/tomcat/bin/startup-custom.sh && \
-    echo 'echo "🎯 JMX Remote: localhost:9999"' >> /usr/local/tomcat/bin/startup-custom.sh && \
+    echo 'echo "🎯 JMX Remote: localhost:9999 (for JConsole/VisualVM)"' >> /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'echo "📱 Application: http://localhost:8081"' >> /usr/local/tomcat/bin/startup-custom.sh && \
+    echo 'echo "💡 Connect JConsole to: service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi"' >> /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'catalina.sh run' >> /usr/local/tomcat/bin/startup-custom.sh && \
     chmod +x /usr/local/tomcat/bin/startup-custom.sh
 
-# Expose ports (thêm JMX ports)
-EXPOSE 8081 8082 9999
+# Expose ports (bỏ 8082 vì không dùng Prometheus agent nữa)
+EXPOSE 8081 9999
 
 # Health check (giữ nguyên)
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
