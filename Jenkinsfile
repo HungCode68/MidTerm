@@ -194,8 +194,12 @@ pipeline {
                     echo "📊 Starting new monitoring stack..."
                     docker-compose -f docker-compose.yml up -d
                     
-                    echo "⏳ Waiting for containers to stabilize..."
-                    timeout /t 20 > nul
+                   echo "⏳ Waiting for containers to stabilize..."
+                '''
+                script {
+                    sleep(20) // Đã sửa lỗi, sử dụng lệnh sleep của Jenkins thay cho timeout
+                }
+                bat '''
                     
                     echo "📋 Active containers:"
                     docker-compose -f docker-compose.yml ps

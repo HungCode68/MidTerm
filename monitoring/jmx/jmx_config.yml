@@ -4,43 +4,43 @@ lowercaseOutputName: false
 lowercaseOutputLabelNames: false
 rules:
   # JVM metrics
-  - pattern: "java.lang<type=Memory><HeapMemoryUsage>(\\w+)"
+  - pattern: 'java.lang<type=Memory><HeapMemoryUsage>(\w+)'
     name: jvm_memory_heap_$1
     type: GAUGE
   
-  - pattern: "java.lang<type=Memory><NonHeapMemoryUsage>(\\w+)"
+  - pattern: 'java.lang<type=Memory><NonHeapMemoryUsage>(\w+)'
     name: jvm_memory_nonheap_$1
     type: GAUGE
   
-  - pattern: "java.lang<type=GarbageCollector, name=(.+)><CollectionCount>"
+  - pattern: 'java.lang<type=GarbageCollector, name=(.+)><CollectionCount>'
     name: jvm_gc_collection_count
     labels:
       gc: "$1"
     type: COUNTER
   
-  - pattern: "java.lang<type=GarbageCollector, name=(.+)><CollectionTime>"
+  - pattern: 'java.lang<type=GarbageCollector, name=(.+)><CollectionTime>'
     name: jvm_gc_collection_time
     labels:
       gc: "$1"
     type: COUNTER
   
   # Tomcat metrics
-  - pattern: "Catalina<type=RequestProcessor, name=\"http-nio-8081\"><requestCount>"
+  - pattern: 'Catalina<type=RequestProcessor, name="http-nio-8081"><requestCount>'
     name: tomcat_request_count
     type: COUNTER
   
-  - pattern: "Catalina<type=RequestProcessor, name=\"http-nio-8081\"><processingTime>"
+  - pattern: 'Catalina<type=RequestProcessor, name="http-nio-8081"><processingTime>'
     name: tomcat_processing_time
     type: COUNTER
   
   # Database connection pool metrics (nếu sử dụng HikariCP)
-  - pattern: "com.zaxxer.hikari<type=Pool, name=(.+)><ActiveConnections>"
+  - pattern: 'com.zaxxer.hikari<type=Pool, name=(.+)><ActiveConnections>'
     name: jdbc_connections_active
     labels:
       pool: "$1"
     type: GAUGE
   
-  - pattern: "com.zaxxer.hikari<type=Pool, name=(.+)><IdleConnections>"
+  - pattern: 'com.zaxxer.hikari<type=Pool, name=(.+)><IdleConnections>'
     name: jdbc_connections_idle
     labels:
       pool: "$1"
