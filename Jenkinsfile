@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'hungcode68/finalterm'
         IMAGE_TAG = 'latest'
-        CONTAINER_NAME = 'vinfastsystem_container' // Tên này sẽ không còn dùng nữa, nhưng giữ lại cho các stage cũ
+        CONTAINER_NAME = 'vinfastsystem_container' 
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
         TOMCAT_PATH = 'C:\\apache-tomcat-10.1.41'
     }
