@@ -185,7 +185,7 @@ pipeline {
             steps {
                 echo '🐳 Building Docker image...'
                 script {
-                    def image = docker.build("${IMAGE_NAME}:${IMAGE_TAG}", "--no-cache .")
+                    def image = docker.build("${IMAGE_NAME}:${IMAGE_TAG}")
                     echo "✅ Docker image built: ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
