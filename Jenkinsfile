@@ -186,100 +186,49 @@ pipeline {
 
 stage('📊 Start Monitoring Stack') {
     steps {
-        echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
+        echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...' [cite: 31]
         bat '''
-	    docker-compose -f docker-compose.yml down || echo "No existing monitoring stack"
-            docker-compose -f docker-compose.yml up -d prometheus grafana node-exporter cadvisor
-            echo "⏳ Waiting for monitoring containers to stabilize..."
-            timeout /t 10 > nul
-            echo "📋 Active monitoring containers:"
-            docker ps --filter "name=prometheus" --filter "name=grafana" --filter "name=node-exporter" --filter "name=cadvisor"
+            echo "🛑 Stopping and removing previous containers..."
+            // Sử dụng docker-compose down để dừng và xóa toàn bộ stack cũ
+            docker-compose -f docker-compose.yml down || echo "No existing monitoring stack to stop" 
+            
+            echo "📊 Starting new monitoring stack..."
+            // Sử dụng docker-compose up để khởi động toàn bộ stack, bao gồm cả ứng dụng
+            docker-compose -f docker-compose.yml up -d 
+            
+            echo "⏳ Waiting for containers to stabilize..."
+            timeout /t 20 > nul
+            
+            echo "📋 Active containers:"
+            docker-compose -f docker-compose.yml ps [cite: 33]
         '''
     }
 }
 
-        stage('🛑 Stop Previous Container') {
-            steps {
-                echo '🛑 Cleaning up previous container...'
-                script {
-                    try {
-                        bat "docker stop ${CONTAINER_NAME} 2>nul || echo 'No container to stop'"
-                        bat "docker rm ${CONTAINER_NAME} 2>nul || echo 'No container to remove'"
-                        echo "✅ Previous container cleaned up"
-                    } catch (Exception e) {
-                        echo "ℹ️ No previous container found"
-                    }
-                }
+       stage('🔍 Health Check') {
+    steps {
+        echo '🔍 Performing application health check...' [cite: 47]
+        script {
+            // Wait a bit more for application to fully load
+            sleep(10) [cite: 47]
+            
+            def logs = bat(
+                script: "docker logs vinfastsystem_app 2>&1",
+                returnStdout: true
+            ) [cite: 48]
+            
+            if (logs.contains("ERROR") || logs.contains("Exception")) { [cite: 49]
+                echo "⚠️ Found errors in container logs:" [cite: 50]
+                echo logs [cite: 50]
+            } else {
+                echo "✅ No critical errors found in logs" [cite: 51]
             }
+            
+            echo "🔌 Testing database connectivity..." [cite: 52]
+            echo "   Make sure SQL Server is running and accessible" [cite: 52]
         }
-
-        stage('🚀 Run Docker Container') {
-            steps {
-                echo '🚀 Starting new Docker container...'
-                script {
-                    // Check if port is available
-                    def portCheck = bat(
-                        script: 'netstat -ano | findstr :8087',
-                        returnStatus: true
-                    )
-                    
-                    if (portCheck == 0) {
-                        error "❌ Port 8087 is already in use!"
-                    }
-                    
-                    // Run container with proper network configuration
-                    bat """docker run -d --name ${CONTAINER_NAME} \
-                           -p 8087:8081 -p 8082:8082 -p 9999:9999 \
-                           --add-host=host.docker.internal:host-gateway \
-                           -e "CATALINA_OPTS=-Ddb.host=host.docker.internal -Xms512m -Xmx1024m" \
-                           ${IMAGE_NAME}:${IMAGE_TAG}"""
-                    
-                    // Wait for container to fully start
-                    echo "⏳ Waiting for container to start..."
-                    sleep(15)
-                    
-                    // Verify container is running
-                    def containerStatus = bat(
-                        script: "docker ps -f name=${CONTAINER_NAME} --format '{{.Status}}'",
-                        returnStdout: true
-                    ).trim()
-                    
-                    echo "📊 Container status: ${containerStatus}"
-                    
-                    if (!containerStatus.contains("Up")) {
-                        bat "docker logs ${CONTAINER_NAME}"
-                        error "❌ Container failed to start properly"
-                    }
-                }
-            }
-        }
-
-        stage('🔍 Health Check') {
-            steps {
-                echo '🔍 Performing application health check...'
-                script {
-                    // Wait a bit more for application to fully load
-                    sleep(10)
-                    
-                    // Check container logs for any errors
-                    def logs = bat(
-                        script: "docker logs ${CONTAINER_NAME} 2>&1",
-                        returnStdout: true
-                    )
-                    
-                    if (logs.contains("ERROR") || logs.contains("Exception")) {
-                        echo "⚠️ Found errors in container logs:"
-                        echo logs
-                    } else {
-                        echo "✅ No critical errors found in logs"
-                    }
-                    
-                    // Test database connection
-                    echo "🔌 Testing database connectivity..."
-                    echo "   Make sure SQL Server is running and accessible"
-                }
-            }
-        }
+    }
+}
 
         stage('📤 Push to Docker Hub') {
             when {
