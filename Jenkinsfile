@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'hungcode68/finalterm'
         IMAGE_TAG = 'latest'
-        CONTAINER_NAME = 'vinfastsystem_container'
+        CONTAINER_NAME = 'vinfastsystem_container' // Tên này sẽ không còn dùng nữa, nhưng giữ lại cho các stage cũ
         DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
         TOMCAT_PATH = 'C:\\apache-tomcat-10.1.41'
     }
@@ -91,37 +91,37 @@ pipeline {
             }
         }
 
-       stage('⚙️ Compile Java') {
-    steps {
-        echo '⚙️ Compiling Java source files...'
-        bat '''
-            @echo off
-            setlocal enabledelayedexpansion
+        stage('⚙️ Compile Java') {
+            steps {
+                echo '⚙️ Compiling Java source files...'
+                bat '''
+                    @echo off
+                    setlocal enabledelayedexpansion
 
-            REM Build classpath with all JARs
-            set CLASSPATH=%TOMCAT_PATH%\\lib\\servlet-api.jar
-            for %%i in (build\\WEB-INF\\lib\\*.jar) do (
-                set CLASSPATH=!CLASSPATH!;%%i
-            )
-            echo 🔧 Classpath: !CLASSPATH!
+                    REM Build classpath with all JARs
+                    set CLASSPATH=%TOMCAT_PATH%\\lib\\servlet-api.jar
+                    for %%i in (build\\WEB-INF\\lib\\*.jar) do (
+                        set CLASSPATH=!CLASSPATH!;%%i
+                    )
+                    echo 🔧 Classpath: !CLASSPATH!
 
-            REM Find all .java files recursively under src\\
-            dir /b /s src\\*.java > sources.txt
+                    REM Find all .java files recursively under src\\
+                    dir /b /s src\\*.java > sources.txt
 
-            REM Compile all Java files from list
-            javac -d build\\WEB-INF\\classes -cp "!CLASSPATH!" @sources.txt
+                    REM Compile all Java files from list
+                    javac -d build\\WEB-INF\\classes -cp "!CLASSPATH!" @sources.txt
 
-            if errorlevel 1 (
-                echo ❌ Compilation failed!
-                exit /b 1
-            ) else (
-                echo ✅ Compilation successful
-                echo 📋 Compiled classes:
-                dir build\\WEB-INF\\classes /S /B
-            )
-        '''
-    }
-}
+                    if errorlevel 1 (
+                        echo ❌ Compilation failed!
+                        exit /b 1
+                    ) else (
+                        echo ✅ Compilation successful
+                        echo 📋 Compiled classes:
+                        dir build\\WEB-INF\\classes /S /B
+                    )
+                '''
+            }
+        }
 
 
         stage('📦 Create WAR') {
@@ -149,27 +149,27 @@ pipeline {
             steps {
                 echo '🚀 Deploying to local Tomcat for testing...'
                 bat '''
-    REM Stop Tomcat gracefully
-    taskkill /f /im java.exe /fi "WINDOWTITLE eq Tomcat" 2>nul || echo "Tomcat not running"
-    ping -n 6 127.0.0.1 > nul
+                    REM Stop Tomcat gracefully
+                    taskkill /f /im java.exe /fi "WINDOWTITLE eq Tomcat" 2>nul || echo "Tomcat not running"
+                    ping -n 6 127.0.0.1 > nul
 
-    REM Clean old deployment
-    if exist "%TOMCAT_PATH%\\webapps\\VinfastSystem*" (
-        rmdir /s /q "%TOMCAT_PATH%\\webapps\\VinfastSystem" 2>nul
-        del "%TOMCAT_PATH%\\webapps\\VinfastSystem.war" 2>nul
-    )
+                    REM Clean old deployment
+                    if exist "%TOMCAT_PATH%\\webapps\\VinfastSystem*" (
+                        rmdir /s /q "%TOMCAT_PATH%\\webapps\\VinfastSystem" 2>nul
+                        del "%TOMCAT_PATH%\\webapps\\VinfastSystem.war" 2>nul
+                    )
 
-    REM Deploy new WAR
-    copy dist\\VinfastSystem.war "%TOMCAT_PATH%\\webapps\\" /Y
+                    REM Deploy new WAR
+                    copy dist\\VinfastSystem.war "%TOMCAT_PATH%\\webapps\\" /Y
 
-    REM Start Tomcat
-    start "" "%TOMCAT_PATH%\\bin\\startup.bat"
+                    REM Start Tomcat
+                    start "" "%TOMCAT_PATH%\\bin\\startup.bat"
 
-    echo "⏳ Waiting for Tomcat to start..."
-    ping -n 16 127.0.0.1 > nul
+                    echo "⏳ Waiting for Tomcat to start..."
+                    ping -n 16 127.0.0.1 > nul
 
-    echo "✅ Local deployment completed"
-'''
+                    echo "✅ Local deployment completed"
+                '''
 
             }
         }
@@ -184,52 +184,48 @@ pipeline {
             }
         }
 
-stage('📊 Start Monitoring Stack') {
-    steps {
-        echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...' [cite: 31]
-        bat '''
-            echo "🛑 Stopping and removing previous containers..."
-            // Sử dụng docker-compose down để dừng và xóa toàn bộ stack cũ
-            docker-compose -f docker-compose.yml down || echo "No existing monitoring stack to stop" 
-            
-            echo "📊 Starting new monitoring stack..."
-            // Sử dụng docker-compose up để khởi động toàn bộ stack, bao gồm cả ứng dụng
-            docker-compose -f docker-compose.yml up -d 
-            
-            echo "⏳ Waiting for containers to stabilize..."
-            timeout /t 20 > nul
-            
-            echo "📋 Active containers:"
-            docker-compose -f docker-compose.yml ps [cite: 33]
-        '''
-    }
-}
-
-       stage('🔍 Health Check') {
-    steps {
-        echo '🔍 Performing application health check...' [cite: 47]
-        script {
-            // Wait a bit more for application to fully load
-            sleep(10) [cite: 47]
-            
-            def logs = bat(
-                script: "docker logs vinfastsystem_app 2>&1",
-                returnStdout: true
-            ) [cite: 48]
-            
-            if (logs.contains("ERROR") || logs.contains("Exception")) { [cite: 49]
-                echo "⚠️ Found errors in container logs:" [cite: 50]
-                echo logs [cite: 50]
-            } else {
-                echo "✅ No critical errors found in logs" [cite: 51]
+        stage('📊 Start Monitoring Stack') {
+            steps {
+                echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
+                bat '''
+                    echo "🛑 Stopping and removing previous containers..."
+                    docker-compose -f docker-compose.yml down || echo "No existing monitoring stack to stop"
+                    
+                    echo "📊 Starting new monitoring stack..."
+                    docker-compose -f docker-compose.yml up -d
+                    
+                    echo "⏳ Waiting for containers to stabilize..."
+                    timeout /t 20 > nul
+                    
+                    echo "📋 Active containers:"
+                    docker-compose -f docker-compose.yml ps
+                '''
             }
-            
-            echo "🔌 Testing database connectivity..." [cite: 52]
-            echo "   Make sure SQL Server is running and accessible" [cite: 52]
         }
-    }
-}
 
+        stage('🔍 Health Check') {
+            steps {
+                echo '🔍 Performing application health check...'
+                script {
+                    sleep(10)
+                    def logs = bat(
+                        script: "docker logs vinfastsystem_app 2>&1",
+                        returnStdout: true
+                    )
+                    
+                    if (logs.contains("ERROR") || logs.contains("Exception")) {
+                        echo "⚠️ Found errors in container logs:"
+                        echo logs
+                        error "Application health check failed: Errors found in logs"
+                    } else {
+                        echo "✅ No critical errors found in logs"
+                    }
+                }
+                echo "🔌 Testing database connectivity..."
+                echo "   Make sure SQL Server is running and accessible"
+            }
+        }
+        
         stage('📤 Push to Docker Hub') {
             when {
                 expression { return params.PUSH_TO_DOCKERHUB != false }
@@ -254,19 +250,19 @@ stage('📊 Start Monitoring Stack') {
             ===============================================
             
             📍 Ứng dụng đã được triển khai tại:
-               • Local Tomcat: http://localhost:8081/VinfastSystem
-               • Docker Container: http://localhost:8087
+                • Local Tomcat: http://localhost:8081/VinfastSystem
+                • Docker Container: http://localhost:8087
             
             🔧 Để kiểm tra và debug:
-               • Container logs: docker logs vinfastsystem_container
-               • Container shell: docker exec -it vinfastsystem_container bash
-               • Tomcat logs: %TOMCAT_PATH%\\logs\\catalina.out
+                • Container logs: docker logs vinfastsystem_app
+                • Container shell: docker exec -it vinfastsystem_app bash
+                • Tomcat logs: %TOMCAT_PATH%\\logs\\catalina.out
             
             📋 Cấu trúc WAR đã được tạo đúng chuẩn với:
-               • Web resources (JSP, HTML, CSS, JS)
-               • Compiled Java classes
-               • JAR libraries (JDBC driver)
-               • web.xml configuration
+                • Web resources (JSP, HTML, CSS, JS)
+                • Compiled Java classes
+                • JAR libraries (JDBC driver)
+                • web.xml configuration
             
             ===============================================
             '''
@@ -278,7 +274,7 @@ stage('📊 Start Monitoring Stack') {
             ===============================================
             
             🔍 Các bước debug:
-            1. Kiểm tra logs: docker logs vinfastsystem_container
+            1. Kiểm tra logs: docker logs vinfastsystem_app
             2. Kiểm tra thư viện: ls Web/WEB-INF/lib/
             3. Kiểm tra SQL Server có chạy không
             4. Kiểm tra port 1433 có mở không
@@ -294,9 +290,18 @@ stage('📊 Start Monitoring Stack') {
             // Show container logs if container exists
             script {
                 try {
-                    bat "docker logs ${CONTAINER_NAME} 2>&1 || echo 'No container logs available'"
+                    def logs = bat(
+                        script: "docker logs vinfastsystem_app 2>&1",
+                        returnStdout: true,
+                        // Thêm `returnStatus: true` để tránh lỗi khi container không tồn tại
+                        returnStatus: true
+                    )
+                    if (logs.contains("Error")) {
+                        echo "Container logs:"
+                        echo logs
+                    }
                 } catch (Exception e) {
-                    echo "Could not retrieve container logs"
+                    echo "Could not retrieve container logs or container does not exist."
                 }
             }
         }
