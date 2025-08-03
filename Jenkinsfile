@@ -174,6 +174,13 @@ pipeline {
             }
         }
 
+		stage('Verify JMX Config') {
+    		steps {
+        	    echo "--- Verifying jmx_config.yml ---"
+                    bat "type monitoring\\jmx\\jmx_config.yml"
+   		 }
+		}
+
         stage('🐳 Build Docker Image') {
             steps {
                 echo '🐳 Building Docker image...'
