@@ -33,7 +33,7 @@ rules:
     name: tomcat_processing_time
     type: COUNTER
 
-  # Database connection pool metrics (HikariCP)
+  # HikariCP (JDBC pool)
   - pattern: 'com.zaxxer.hikari<type=Pool, name=(.+)><ActiveConnections>'
     name: jdbc_connections_active
     labels:
