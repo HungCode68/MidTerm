@@ -14,13 +14,14 @@ COPY jmx-config.yaml /usr/local/tomcat/lib/
 
 # Cấu hình JVM với database connection và JMX monitoring + Prometheus exporter
 ENV CATALINA_OPTS="-Ddb.host=host.docker.internal \
-    -Xms512m -Xmx1024m \
-    -Djava.awt.headless=true \
-    -Dcom.sun.management.jmxremote \
-    -Dcom.sun.management.jmxremote.port=9999 \
-    -Dcom.sun.management.jmxremote.authenticate=false \
-    -Dcom.sun.management.jmxremote.ssl=false \
-    -javaagent:/usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar=8082:/usr/local/tomcat/lib/jmx-config.yaml"
+ -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 \
+ -Xms512m -Xmx1024m -Djava.awt.headless=true \
+ -Dcom.sun.management.jmxremote \
+ -Dcom.sun.management.jmxremote.port=9999 \
+ -Dcom.sun.management.jmxremote.authenticate=false \
+ -Dcom.sun.management.jmxremote.ssl=false \
+ -javaagent:/usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar=8082:/usr/local/tomcat/lib/jmx-config.yaml"
+
 
 # Copy WAR file
 COPY dist/VinfastSystem.war /usr/local/tomcat/webapps/ROOT.war
