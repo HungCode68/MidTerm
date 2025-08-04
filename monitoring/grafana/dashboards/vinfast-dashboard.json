@@ -12,7 +12,8 @@
         "targets": [
           {
             "expr": "up{job=\"vinfastsystem\"}",
-            "refId": "A"
+            "refId": "A",
+            "datasource": "Prometheus"
           }
         ],
         "fieldConfig": {
@@ -22,13 +23,13 @@
             },
             "thresholds": {
               "steps": [
-                {"color": "red", "value": 0},
-                {"color": "green", "value": 1}
+                { "color": "red", "value": 0 },
+                { "color": "green", "value": 1 }
               ]
             }
           }
         },
-        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
       },
       {
         "id": 2,
@@ -37,10 +38,11 @@
         "targets": [
           {
             "expr": "rate(http_requests_total{job=\"vinfastsystem\"}[5m])",
-            "refId": "A"
+            "refId": "A",
+            "datasource": "Prometheus"
           }
         ],
-        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
       },
       {
         "id": 3,
@@ -49,10 +51,11 @@
         "targets": [
           {
             "expr": "jvm_memory_used_bytes{job=\"vinfastsystem\"}",
-            "refId": "A"
+            "refId": "A",
+            "datasource": "Prometheus"
           }
         ],
-        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 }
       },
       {
         "id": 4,
@@ -61,10 +64,11 @@
         "targets": [
           {
             "expr": "jdbc_connections_active{job=\"vinfastsystem\"}",
-            "refId": "A"
+            "refId": "A",
+            "datasource": "Prometheus"
           }
         ],
-        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 }
       }
     ],
     "time": {
