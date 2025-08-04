@@ -1,17 +1,13 @@
 FROM tomcat:10.1.41-jdk21
 
-# Cài curl để tải file JMX Exporter
-RUN apt-get update && apt-get install -y curl
-
 # Xóa ứng dụng mặc định
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Thay đổi port Tomcat
 RUN sed -i 's/port="8080"/port="8081"/' /usr/local/tomcat/conf/server.xml
 
-# Tải JMX Exporter
-RUN curl -L -o /usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar \
-    https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.18.0/jmx_prometheus_javaagent-0.18.0.jar
+# Copy JMX Exporter jar (đã tải về từ trước)
+COPY monitoring/jmx/jmx_prometheus_javaagent-0.18.0.jar /usr/local/tomcat/lib/
 
 # Copy file cấu hình JMX Exporter
 COPY jmx-config.yaml /usr/local/tomcat/lib/
@@ -40,9 +36,12 @@ RUN echo '#!/bin/bash' > /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'catalina.sh run' >> /usr/local/tomcat/bin/startup-custom.sh && \
     chmod +x /usr/local/tomcat/bin/startup-custom.sh
 
+# Expose các port
 EXPOSE 8081 9999 8082
 
+# Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:8081/ || exit 1
 
+# Lệnh khởi động
 CMD ["/usr/local/tomcat/bin/startup-custom.sh"]
