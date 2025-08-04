@@ -7,7 +7,7 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 RUN sed -i 's/port="8080"/port="8081"/' /usr/local/tomcat/conf/server.xml
 
 # Tải JMX Exporter
-ADD https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.18.0/jmx_prometheus_javaagent-0.18.0.jar /usr/local/tomcat/lib/
+RUN curl -L -o /usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.18.0/jmx_prometheus_javaagent-0.18.0.jar
 
 # Copy file cấu hình JMX Exporter
 COPY jmx-config.yaml /usr/local/tomcat/lib/
