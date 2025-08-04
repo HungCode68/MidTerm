@@ -7,7 +7,7 @@ services:
     container_name: vinfastsystem_app
     environment:
       # Bỏ set lại CATALINA_OPTS nếu đã set trong Dockerfile, hoặc gộp như sau nếu cần override:
-      - CATALINA_OPTS=-Ddb.host=host.docker.internal -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 -Xms512m -Xmx1024m -Djava.awt.headless=true -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -javaagent:/usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar=8082:/usr/local/tomcat/lib/jmx-config.yaml
+      - CATALINA_OPTS=-Ddb.host=host.docker.internal -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 -Xms512m -Xmx1024m 
     ports:
       - "8087:8081"   # Application port
       - "9999:9999"   # JMX remote port 
