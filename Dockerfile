@@ -1,5 +1,8 @@
 FROM tomcat:10.1.41-jdk21
 
+# Cài curl để tải file JMX Exporter
+RUN apt-get update && apt-get install -y curl
+
 # Xóa ứng dụng mặc định
 RUN rm -rf /usr/local/tomcat/webapps/*
 
@@ -7,12 +10,13 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 RUN sed -i 's/port="8080"/port="8081"/' /usr/local/tomcat/conf/server.xml
 
 # Tải JMX Exporter
-RUN curl -L -o /usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.18.0/jmx_prometheus_javaagent-0.18.0.jar
+RUN curl -L -o /usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar \
+    https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.18.0/jmx_prometheus_javaagent-0.18.0.jar
 
 # Copy file cấu hình JMX Exporter
 COPY jmx-config.yaml /usr/local/tomcat/lib/
 
-# Cấu hình JVM với database connection và JMX monitoring + Prometheus exporter
+# Cấu hình JVM với DB + JMX Exporter
 ENV CATALINA_OPTS="-Ddb.host=host.docker.internal \
  -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 \
  -Xms512m -Xmx1024m -Djava.awt.headless=true \
@@ -22,11 +26,10 @@ ENV CATALINA_OPTS="-Ddb.host=host.docker.internal \
  -Dcom.sun.management.jmxremote.ssl=false \
  -javaagent:/usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar=8082:/usr/local/tomcat/lib/jmx-config.yaml"
 
-
 # Copy WAR file
 COPY dist/VinfastSystem.war /usr/local/tomcat/webapps/ROOT.war
 
-# Tạo script startup với thông tin đã cập nhật
+# Tạo startup script
 RUN echo '#!/bin/bash' > /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'echo "🚀 Starting VinfastSystem Application with JMX Monitoring + Prometheus Metrics"' >> /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'echo "🔗 Database Host: host.docker.internal"' >> /usr/local/tomcat/bin/startup-custom.sh && \
@@ -37,12 +40,9 @@ RUN echo '#!/bin/bash' > /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'catalina.sh run' >> /usr/local/tomcat/bin/startup-custom.sh && \
     chmod +x /usr/local/tomcat/bin/startup-custom.sh
 
-# Expose ports: 8081 (app), 9999 (JMX), 8082 (Prometheus metrics)
 EXPOSE 8081 9999 8082
 
-# Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:8081/ || exit 1
 
-# Start application
 CMD ["/usr/local/tomcat/bin/startup-custom.sh"]
