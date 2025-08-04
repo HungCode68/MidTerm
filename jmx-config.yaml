@@ -1,0 +1,16 @@
+startDelaySeconds: 0
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+rules:
+  - pattern: 'java.lang:type=Memory'
+    name: jvm_memory_used_bytes
+    type: GAUGE
+    attr:
+      HeapMemoryUsage.used: used_heap
+      NonHeapMemoryUsage.used: used_nonheap
+
+  - pattern: 'java.lang:type=Runtime'
+    name: jvm_uptime_seconds
+    type: GAUGE
+    attr:
+      Uptime: uptime
