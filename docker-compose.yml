@@ -5,9 +5,7 @@ services:
   vinfastsystem:
     build: .
     container_name: vinfastsystem_app
-    environment:
-      # Bỏ set lại CATALINA_OPTS nếu đã set trong Dockerfile, hoặc gộp như sau nếu cần override:
-      - CATALINA_OPTS=-Ddb.host=host.docker.internal -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 -Xms512m -Xmx1024m 
+    
     ports:
       - "8087:8081"   # Application port
       - "9999:9999"   # JMX remote port 
