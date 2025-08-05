@@ -174,17 +174,7 @@ pipeline {
 
         // BỎ stage 'Verify JMX Config' vì không cần nữa
 
-        stage('🐳 Build Docker Image') {
-            steps {
-                echo '🐳 Building Docker image...'
-                script {
-                    // Force rebuild để tránh cache issues
-                    bat 'docker rmi hungcode68/finalterm:latest || echo "Image not found, continuing..."'
-                    bat 'docker build --no-cache -t "hungcode68/finalterm:latest" .'
-                    echo "✅ Docker image built: ${IMAGE_NAME}:${IMAGE_TAG}"
-                }
-            }
-        }
+        
 
         stage('📊 Start Monitoring Stack') {
             steps {
@@ -196,7 +186,7 @@ pipeline {
                     docker-compose -f docker-compose.yml down || echo "No existing monitoring stack to stop"
                     
                     echo "📊 Starting new monitoring stack..."
-                    docker-compose -f docker-compose.yml up -d
+                    docker-compose -f docker-compose.yml up -d --build
                     
                     echo "⏳ Waiting for containers to stabilize..."
                 '''
