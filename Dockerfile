@@ -31,7 +31,7 @@ RUN echo '#!/bin/bash' > /usr/local/tomcat/bin/startup-custom.sh && \
 # Expose ports 
 EXPOSE 8081 9999
 
-# Health check (giữ nguyên)
+# Health check 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:8081/ || exit 1
 
