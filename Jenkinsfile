@@ -123,6 +123,26 @@ pipeline {
             }
         }
 
+
+// STAGE MỚI: Phân tích mã nguồn với SonarQube
+        stage('🔬 SonarQube Analysis') {
+            steps {
+                echo '🔬 Running SonarQube code analysis...'
+                withSonarQubeEnv('Sonarqube') {
+                    withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                        bat '''
+                            # Đường dẫn đến SonarQube Scanner
+                            # Nếu bạn đã cài đặt SonarQube Scanner trên Jenkins agent, bạn có thể gọi trực tiếp
+                            # Nếu không, bạn cần thêm SonarQube Scanner vào environment path
+                            
+                            # Cấu hình SonarScanner
+                            sonar-scanner.bat -Dsonar.projectKey=VinfastSystem -Dsonar.projectName="VinfastSystem Application" -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib
+                        '''
+                    }
+                }
+            }
+        }
+
         stage('📦 Create WAR') {
             steps {
                 echo '📦 Creating WAR file with proper structure...'
