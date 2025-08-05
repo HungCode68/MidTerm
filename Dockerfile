@@ -6,7 +6,6 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 # Thay đổi port Tomcat
 RUN sed -i 's/port="8080"/port="8081"/' /usr/local/tomcat/conf/server.xml
 
-# BỎ JMX Prometheus Agent - chỉ giữ JMX remote
 # Cấu hình JVM với database connection và JMX monitoring đơn giản
 ENV CATALINA_OPTS="-Ddb.host=host.docker.internal \
     -Xms512m -Xmx1024m \
