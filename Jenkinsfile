@@ -130,7 +130,8 @@ pipeline {
             echo '🔬 Running SonarQube code analysis...'
             withSonarQubeEnv('Sonarqube') {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                    bat "sonar-scanner.bat -Dsonar.projectKey=VinfastSystem -Dsonar.projectName='VinfastSystem Application' -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib"
+                    // Gọi trực tiếp sonar-scanner.bat bằng đường dẫn đầy đủ
+                    bat '"C:\\sonar-scanner\\sonar-scanner-cli-7.1.0.4889-windows-x64\\bin\\sonar-scanner.bat" -Dsonar.projectKey=VinfastSystem -Dsonar.projectName="VinfastSystem Application" -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib'
                 }
             }
         }
@@ -308,7 +309,7 @@ pipeline {
             • SQL Server không chạy hoặc không cho phép TCP/IP
             • Port conflict
             • Compilation errors
-            ===============================================
+            =============================================
             '''
             
             // Show container logs if container exists
