@@ -137,7 +137,7 @@ pipeline {
                     // Sử dụng block withEnv để thêm thư mục bin vào PATH
                     withEnv(["PATH+SONAR=${sonarScannerBin}"]) {
                         // Bây giờ bạn có thể gọi sonar-scanner.bat trực tiếp
-                        bat "sonar-scanner.bat -Dsonar.projectKey=VinfastSystem -Dsonar.projectName=\"VinfastSystem Application\" -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib"
+                        bat "sonar-scanner.bat -Dsonar.projectKey=VinfastSystem -Dsonar.projectName=\"VinfastSystem Application\" -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib -Dsonar.userHome=%WORKSPACE%"
                     }
                 }
             }
