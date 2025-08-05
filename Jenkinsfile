@@ -176,12 +176,15 @@ pipeline {
 
         
 
-      stage('📊 Start Monitoring Stack') {
+    stage('📊 Start Monitoring Stack') {
     steps {
         echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
         bat '''
             echo "🛑 Stopping and removing previous containers and networks..."
             docker-compose -f docker-compose.yml down --remove-orphans || echo "No existing monitoring stack to stop"
+            
+            echo "⏳ Giving Docker a few seconds to clean up..."
+            timeout /t 5 /nobreak >nul
             
             echo "📊 Starting new monitoring stack..."
             docker-compose -f docker-compose.yml up -d --build
