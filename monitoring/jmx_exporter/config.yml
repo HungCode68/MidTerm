@@ -1,0 +1,58 @@
+---
+startDelaySeconds: 0
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+ssl: false
+# Dòng này cần được bật khi chạy trên JDK 9+
+# rules:
+#   - pattern: "java.lang<type=OperatingSystem>(.*)"
+#     name: "jvm_operating_system_$1"
+#     labels: {}
+#     help: "Operating System metrics for the JVM"
+#     type: GAUGE
+rules:
+  - pattern: "java.lang<type=OperatingSystem><>name=(.+)>"
+    name: "jvm_operating_system"
+    value: 1
+    labels:
+      name: "$1"
+    help: "Operating System metrics for the JVM"
+    type: GAUGE
+
+  - pattern: "java.lang<type=GarbageCollector, name=(.+)>"
+    name: "jvm_gc_collection"
+    value: "CollectionCount"
+    labels:
+      gc: "$1"
+    help: "Garbage Collector collection count"
+    type: COUNTER
+
+  - pattern: "java.lang<type=GarbageCollector, name=(.+)>"
+    name: "jvm_gc_collection_time"
+    value: "CollectionTime"
+    labels:
+      gc: "$1"
+    help: "Garbage Collector collection time in milliseconds"
+    type: COUNTER
+
+  - pattern: "java.lang<type=MemoryPool, name=(.+)>"
+    name: "jvm_memory_pool"
+    value: "Usage"
+    labels:
+      pool: "$1"
+    help: "Memory pool usage"
+    type: GAUGE
+
+  - pattern: "java.lang<type=Memory><>HeapMemoryUsage=(\\d+)>"
+    name: "jvm_heap_memory_usage"
+    value: "$1"
+    labels: {}
+    help: "Heap memory usage in bytes"
+    type: GAUGE
+
+  - pattern: "java.lang<type=Memory><>NonHeapMemoryUsage=(\\d+)>"
+    name: "jvm_non_heap_memory_usage"
+    value: "$1"
+    labels: {}
+    help: "Non-heap memory usage in bytes"
+    type: GAUGE

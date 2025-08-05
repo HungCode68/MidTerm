@@ -25,7 +25,7 @@ scrape_configs:
   # Monitor Java Servlet app
   - job_name: 'vinfastsystem'
     static_configs:
-      - targets: ['vinfastsystem:8087']
+      - targets: ['vinfastsystem:12345']
 
 
   # BỎ job 'vinfastsystem' vì không còn HTTP metrics endpoint
