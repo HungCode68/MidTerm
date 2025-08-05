@@ -176,29 +176,27 @@ pipeline {
 
         
 
-        stage('📊 Start Monitoring Stack') {
-            steps {
-                echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
-                bat '''
-                    echo "🛑 Stopping and removing previous containers..."
-                    docker-compose -f docker-compose.yml stop || echo "No running containers to stop"
-                    docker-compose -f docker-compose.yml rm -f || echo "No containers to remove"
-                    docker-compose -f docker-compose.yml down || echo "No existing monitoring stack to stop"
-                    
-                    echo "📊 Starting new monitoring stack..."
-                    docker-compose -f docker-compose.yml up -d --build
-                    
-                    echo "⏳ Waiting for containers to stabilize..."
-                '''
-                script {
-                    sleep(30) // Tăng thời gian chờ để container khởi động ổn định
-                }
-                bat '''
-                    echo "📋 Active containers:"
-                    docker-compose -f docker-compose.yml ps
-                '''
-            }
+      stage('📊 Start Monitoring Stack') {
+    steps {
+        echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
+        bat '''
+            echo "🛑 Stopping and removing previous containers and networks..."
+            docker-compose -f docker-compose.yml down --remove-orphans || echo "No existing monitoring stack to stop"
+            
+            echo "📊 Starting new monitoring stack..."
+            docker-compose -f docker-compose.yml up -d --build
+            
+            echo "⏳ Waiting for containers to stabilize..."
+        '''
+        script {
+            sleep(30) // Tăng thời gian chờ để container khởi động ổn định
         }
+        bat '''
+            echo "📋 Active containers:"
+            docker-compose -f docker-compose.yml ps
+        '''
+    }
+}
 
         stage('🔍 Health Check') {
             steps {
