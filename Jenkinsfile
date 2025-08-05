@@ -130,9 +130,7 @@ pipeline {
             echo '🔬 Running SonarQube code analysis...'
             withSonarQubeEnv('Sonarqube') {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                    // Gọi sonar-scanner bằng tên đã cấu hình trong Tools
-                    // Bạn sẽ không cần sonar-scanner.bat nữa
-                    bat "sonar-scanner -Dsonar.projectKey=VinfastSystem -Dsonar.projectName='VinfastSystem Application' -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib"
+                    bat "sonar-scanner.bat -Dsonar.projectKey=VinfastSystem -Dsonar.projectName='VinfastSystem Application' -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib"
                 }
             }
         }
