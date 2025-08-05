@@ -28,7 +28,7 @@ RUN echo '#!/bin/bash' > /usr/local/tomcat/bin/startup-custom.sh && \
     echo 'catalina.sh run' >> /usr/local/tomcat/bin/startup-custom.sh && \
     chmod +x /usr/local/tomcat/bin/startup-custom.sh
 
-# Expose ports (bỏ 8082 vì không dùng Prometheus agent nữa)
+# Expose ports 
 EXPOSE 8081 9999
 
 # Health check (giữ nguyên)
