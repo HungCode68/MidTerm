@@ -130,8 +130,15 @@ pipeline {
             echo '🔬 Running SonarQube code analysis...'
             withSonarQubeEnv('Sonarqube') {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                    // Gọi trực tiếp sonar-scanner.bat bằng đường dẫn đầy đủ
-                    bat '"C:\\sonar-scanner\\sonar-scanner-cli-7.1.0.4889-windows-x64\\bin\\sonar-scanner.bat" -Dsonar.projectKey=VinfastSystem -Dsonar.projectName="VinfastSystem Application" -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib'
+                    // Định nghĩa đường dẫn tới thư mục bin của SonarQube Scanner
+                    def sonarScannerHome = 'C:\\sonar-scanner\\sonar-scanner-7.1.0.4889-windows-x64'
+                    def sonarScannerBin = "${sonarScannerHome}\\bin"
+
+                    // Sử dụng block withEnv để thêm thư mục bin vào PATH
+                    withEnv(["PATH+SONAR=${sonarScannerBin}"]) {
+                        // Bây giờ bạn có thể gọi sonar-scanner.bat trực tiếp
+                        bat "sonar-scanner.bat -Dsonar.projectKey=VinfastSystem -Dsonar.projectName='VinfastSystem Application' -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib"
+                    }
                 }
             }
         }
