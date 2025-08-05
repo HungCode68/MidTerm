@@ -6,11 +6,11 @@ services:
     build: .
     container_name: vinfastsystem_app
     environment:
-      - CATALINA_OPTS=-Ddb.host=host.docker.internal -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 -Xms512m -Xmx1024m -Djava.awt.headless=true -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -javaagent:/usr/local/tomcat/lib/jmx_prometheus_javaagent-0.18.0.jar=8082:/usr/local/tomcat/lib/jmx-config.yaml
+      # Chỉ sử dụng database config - BỎ JMX Prometheus agent
+      - CATALINA_OPTS=-Ddb.host=host.docker.internal -Ddb.port=1433 -Ddb.name=VinfastSystem -Ddb.user=sa -Ddb.password=123 -Xms512m -Xmx1024m
     ports:
       - "8087:8081"   # Application port
       - "9999:9999"   # JMX remote port 
-      - "8082:8082"   # Prometheus metrics port 👈 ADD
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:
