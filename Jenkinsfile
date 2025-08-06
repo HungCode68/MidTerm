@@ -319,7 +319,7 @@ pipeline {
             • SQL Server không chạy hoặc không cho phép TCP/IP
             • Port conflict
             • Compilation errors
-            =============================================
+            ============================================
             '''
             
             // Show container logs if container exists
