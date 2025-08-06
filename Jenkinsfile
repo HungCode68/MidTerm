@@ -297,7 +297,7 @@ pipeline {
                 • JAR libraries (JDBC driver)
                 • web.xml configuration
             
-            ===========================================
+            ==========================================
             '''
         }
         failure {
