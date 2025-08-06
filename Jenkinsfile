@@ -204,6 +204,29 @@ pipeline {
     }
 }
 
+	stage('🔬 SonarQube Analysis') {
+    steps {
+        script {
+            echo '🔬 Running SonarQube code analysis...'
+	    echo '⏳ Waiting for SonarQube server to start...'
+            sleep(60)
+            withSonarQubeEnv('Sonarqube') {
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                    // Định nghĩa đường dẫn tới thư mục bin của SonarQube Scanner
+                    def sonarScannerHome = 'C:\\sonar-scanner\\sonar-scanner-7.1.0.4889-windows-x64'
+                    def sonarScannerBin = "${sonarScannerHome}\\bin"
+
+                    // Sử dụng block withEnv để thêm thư mục bin vào PATH
+                    withEnv(["PATH+SONAR=${sonarScannerBin}"]) {
+                        // Bây giờ bạn có thể gọi sonar-scanner.bat trực tiếp
+                        bat "sonar-scanner.bat -Dsonar.projectKey=VinfastSystem -Dsonar.projectName=\"VinfastSystem Application\" -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.sources=src -Dsonar.java.binaries=build/WEB-INF/classes -Dsonar.java.libraries=build/WEB-INF/lib -Dsonar.userHome=%WORKSPACE%"
+                    }
+                }
+            }
+        }
+    }
+}
+
         stage('🔍 Health Check') {
             steps {
                 echo '🔍 Performing application health check...'
