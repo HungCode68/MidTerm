@@ -30,6 +30,7 @@ pipeline {
                     mkdir build\\WEB-INF\\lib
                     
                     echo "✅ Build directories created"
+		    dir "build"
                 '''
             }
         }
