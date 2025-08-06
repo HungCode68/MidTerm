@@ -213,12 +213,12 @@ pipeline {
             timeout /t 5 /nobreak >nul
             
             echo "📊 Starting new monitoring stack..."
-            docker-compose -f docker-compose.yml up -d --force-recreate --build
+            docker-compose -f docker-compose.yml up -d --build
             
             echo "⏳ Waiting for containers to stabilize..."
         '''
         script {
-            sleep(30) 
+            sleep(30) // Tăng thời gian chờ để container khởi động ổn định
         }
         bat '''
             echo "📋 Active containers:"
