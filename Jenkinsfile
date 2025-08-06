@@ -202,7 +202,7 @@ pipeline {
 
         
 
-    stage('📊 Start Monitoring Stack') {
+   stage('📊 Start Monitoring Stack') {
     steps {
         echo '📊 Starting Prometheus, Grafana, Node Exporter, and cAdvisor...'
         bat '''
@@ -213,12 +213,12 @@ pipeline {
             timeout /t 5 /nobreak >nul
             
             echo "📊 Starting new monitoring stack..."
-            docker-compose -f docker-compose.yml up -d --build
+            docker-compose -f docker-compose.yml up -d --force-recreate --build
             
             echo "⏳ Waiting for containers to stabilize..."
         '''
         script {
-            sleep(30) // Tăng thời gian chờ để container khởi động ổn định
+            sleep(30) 
         }
         bat '''
             echo "📋 Active containers:"
