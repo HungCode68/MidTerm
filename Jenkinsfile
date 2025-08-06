@@ -209,7 +209,7 @@ pipeline {
         script {
             echo '🔬 Running SonarQube code analysis...'
 	    echo '⏳ Waiting for SonarQube server to start...'
-            sleep(120)
+            sleep(150)
             withSonarQubeEnv('Sonarqube') {
                 withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
                     // Định nghĩa đường dẫn tới thư mục bin của SonarQube Scanner
