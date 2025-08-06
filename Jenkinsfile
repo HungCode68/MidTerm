@@ -175,7 +175,16 @@ pipeline {
             }
         }
 
-        // BỎ stage 'Verify JMX Config' vì không cần nữa
+         stage('Restart Tomcat') {
+            steps {
+                echo 'Restarting Tomcat server'
+                bat '''
+                    call "%TOMCAT_PATH%\\bin\\shutdown.bat"
+                    timeout /t 5
+                    call "%TOMCAT_PATH%\\bin\\startup.bat"
+                '''
+            }
+        }
 
         
 
