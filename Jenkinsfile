@@ -175,17 +175,6 @@ pipeline {
             }
         }
 
-         stage('Restart Tomcat') {
-            steps {
-                echo 'Restarting Tomcat server'
-                bat '''
-                    call "%TOMCAT_PATH%\\bin\\shutdown.bat"
-                    timeout /t 5
-                    call "%TOMCAT_PATH%\\bin\\startup.bat"
-                '''
-            }
-        }
-
         
 
    stage('📊 Start Monitoring Stack') {
@@ -277,6 +266,19 @@ pipeline {
                 }
             }
         }
+
+
+	 stage('Restart Tomcat') {
+            steps {
+                echo 'Restarting Tomcat server'
+                bat '''
+                    call "%TOMCAT_PATH%\\bin\\shutdown.bat"
+                    timeout /t 5
+                    call "%TOMCAT_PATH%\\bin\\startup.bat"
+                '''
+            }
+        }
+
     }
 
     post {
