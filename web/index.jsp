@@ -248,7 +248,7 @@
                 </div>
                 <% } else { %>
                
-                <a href="login.jsp" style="color: blue">Đăng Nhập /</a>
+                <a href="login.jsp" style="color: blue">Đăng Nhập2025 /</a>
                 <a href="register.jsp" style="color: blue">Đăng Ký</a>
                 <% } %>
 
