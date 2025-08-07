@@ -102,7 +102,7 @@ services:
       - vinfast_network
     restart: unless-stopped
 
-# SonarQube Service
+
   sonarqube:
     image: sonarqube:latest
     container_name: sonarqube
