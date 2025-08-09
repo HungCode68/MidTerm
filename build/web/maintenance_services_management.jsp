@@ -17,7 +17,7 @@
 %>
 <html>
     <head>
-        <title>Quản lý dịch vụ bảo dưỡng</title>
+        <title>Maintenance service management</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -25,60 +25,60 @@
     </head>
     <body >
 
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
-    <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold text-white" href="#">
-            <i class="fas fa-tools mr-1"></i> Management Page
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
+            <div class="container-fluid">
+                <a class="navbar-brand font-weight-bold text-white" href="#">
+                    <i class="fas fa-tools mr-1"></i> Management Page
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
-                </li>
-            </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
+                            <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
+                        </li>
+                    </ul>
 
-            <span class="navbar-text ml-auto text-white">
-                <i class="fas fa-user-circle mr-1"></i>
-                Hello, <strong><%= currentUser.getFullName() %></strong>
-            </span>
-        </div>
-    </div>
-</nav>
+                    <span class="navbar-text ml-auto text-white">
+                        <i class="fas fa-user-circle mr-1"></i>
+                        Hello, <strong><%= currentUser.getFullName() %></strong>
+                    </span>
+                </div>
+            </div>
+        </nav>
 
 
-        <h2>Danh sách dịch vụ bảo dưỡng</h2>
+        <h2>List of maintenance services</h2>
 
         <form method="get" action="dashboard-maintenance-services" class="mb-3 d-flex">
             <input type="text" name="keyword" class="form-control me-2" placeholder="Tìm theo tên dịch vụ" value="<%= request.getAttribute("keyword") != null ? request.getAttribute("keyword") : "" %>">
@@ -96,10 +96,10 @@
             <thead class="bg-white text-dark text-center">
                 <tr>
                     <th>ID</th>
-                    <th>Tên dịch vụ</th>
-                    <th>Mô tả</th>
-                    <th>Giá</th>
-                    <th>Thao tác</th>
+                    <th>Service Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -126,37 +126,37 @@
             </tbody>
         </table>
 
-       <!-- Add Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="add-maintenance-service" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add Service</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label">Service Name:</label>
-                        <input type="text" name="serviceName" class="form-control" placeholder="Enter service name" required>
+        <!-- Add Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="add-maintenance-service" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addModalLabel">Add Service</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Service Name:</label>
+                                <input type="text" name="serviceName" class="form-control" placeholder="Enter service name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Description:</label>
+                                <textarea name="description" class="form-control" rows="3" placeholder="Enter description"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Price:</label>
+                                <input type="number" name="price" class="form-control" step="1000" placeholder="Enter price" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Description:</label>
-                        <textarea name="description" class="form-control" rows="3" placeholder="Enter description"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Price:</label>
-                        <input type="number" name="price" class="form-control" step="1000" placeholder="Enter price" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </div>
+                </form>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
 
         <!-- Modal Sửa -->
@@ -165,33 +165,32 @@
      boolean showEditModal = editService != null;
      if (showEditModal) {
         %>
-        <!-- Modal Sửa -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="edit-maintenance-service" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel">Sửa dịch vụ</h5>
+                            <h5 class="modal-title" id="editModalLabel">Edit Service</h5>
                             <a href="dashboard-maintenance-services" class="btn-close" aria-label="Close"></a>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="serviceId" value="<%= editService.getServiceId() %>">
                             <div class="mb-3">
-                                <label class="form-label">Tên dịch vụ:</label>
+                                <label class="form-label">Service Name:</label>
                                 <input type="text" name="serviceName" value="<%= editService.getServiceName() %>" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Mô tả:</label>
+                                <label class="form-label">Description:</label>
                                 <textarea name="description" class="form-control" rows="3"><%= editService.getDescription() %></textarea>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Giá:</label>
+                                <label class="form-label">Price:</label>
                                 <input type="number" name="price" value="<%= editService.getPrice() %>" class="form-control" step="1000" required>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Cập nhật</button>
-                            <a href="dashboard-maintenance-services" class="btn btn-secondary">Huỷ</a>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="dashboard-maintenance-services" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </form>

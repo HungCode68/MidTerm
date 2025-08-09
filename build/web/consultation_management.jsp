@@ -23,67 +23,67 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Quản lý tư vấn</title>
+        <title>Consulting Management</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
     </head>
-    
+
     <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
-    <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold text-white" href="#">
-            <i class="fas fa-tools mr-1"></i> Management Page
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
+            <div class="container-fluid">
+                <a class="navbar-brand font-weight-bold text-white" href="#">
+                    <i class="fas fa-tools mr-1"></i> Management Page
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
-                </li>
-            </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
+                            <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
+                        </li>
+                    </ul>
 
-            <span class="navbar-text ml-auto text-white">
-                <i class="fas fa-user-circle mr-1"></i>
-                Hello, <strong><%= currentUser.getFullName() %></strong>
-            </span>
-        </div>
-    </div>
-</nav>
+                    <span class="navbar-text ml-auto text-white">
+                        <i class="fas fa-user-circle mr-1"></i>
+                        Hello, <strong><%= currentUser.getFullName() %></strong>
+                    </span>
+                </div>
+            </div>
+        </nav>
         <div >
-            <h2 class="text-center mb-4">Quản lý yêu cầu tư vấn</h2>
+            <h2 class="text-center mb-4">Manage consulting requests</h2>
 
             <!-- Form tìm kiếm -->
             <form method="get" action="dashboard-consultations" class="form-inline mb-4">
@@ -103,12 +103,12 @@
                 <thead class="bg-white text-dark text-center">
                     <tr>
                         <th>ID</th>
-                        <th>Họ tên</th>
-                        <th>UserId</th>
-                        <th>SĐT</th>
-                        <th>Tên xe</th>
-                        <th>Ngày yêu cầu</th>
-                        <th>Hành động</th>
+                        <th>Full Name</th>
+                        <th>User ID</th>
+                        <th>Phone Number</th>
+                        <th>Car Name</th>
+                        <th>Request Date</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -142,100 +142,97 @@
             </table>
         </div>
 
-        <!-- Modal Thêm -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" >
-        <form method="post" action="add-consultation" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thêm tư vấn</h5>
-                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <form method="post" action="add-consultation" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Consultation</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
 
-            <div class="modal-body p-3">
+                    <div class="modal-body p-3">
 
-                <!-- Chọn tài khoản -->
-                <div class="mb-3">
-                    <label for="userId" class="form-label">Chọn tài khoản người dùng:</label>
-                    <select name="userId" id="userId" class="form-control mb-2" onchange="togglePhoneField()">
-                        <option value="">-- Không có tài khoản --</option>
-                        <% if (users != null) {
+                        <div class="mb-3">
+                            <label for="userId" class="form-label">Select User Account:</label>
+                            <select name="userId" id="userId" class="form-control mb-2" onchange="togglePhoneField()">
+                                <option value="">-- No Account --</option>
+                                <% if (users != null) {
                             for (User user : users) { %>
                                 <option value="<%= user.getUserId() %>"><%= user.getFullName() %></option>
-                        <%  }} %>
-                    </select>
-                </div>
+                                <%  }} %>
+                            </select>
+                        </div>
 
-                <!-- Nhập họ tên -->
-                <div id="nameInputGroup" class="mb-3" style="display:none;">
-                    <label for="fullName" class="form-label">Họ và tên:</label>
-                    <input type="text" name="fullName" id="fullName" placeholder="Nhập họ tên" class="form-control">
-                </div>
+                        <div id="nameInputGroup" class="mb-3" style="display:none;">
+                            <label for="fullName" class="form-label">Full Name:</label>
+                            <input type="text" name="fullName" id="fullName" placeholder="Enter full name" class="form-control">
+                        </div>
 
-                <!-- Nhập số điện thoại -->
-                <div id="phoneInputGroup" class="mb-3" style="display:none;">
-                    <label for="phoneNumber" class="form-label">Số điện thoại:</label>
-                    <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Nhập số điện thoại" class="form-control">
-                </div>
+                        <div id="phoneInputGroup" class="mb-3" style="display:none;">
+                            <label for="phoneNumber" class="form-label">Phone Number:</label>
+                            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Enter phone number" class="form-control">
+                        </div>
 
-                <!-- Chọn xe -->
-                <div class="mb-3">
-                    <label for="carId" class="form-label">Chọn xe cần tư vấn:</label>
-                    <select name="carId" class="form-control mb-2" required>
-                        <option value="">-- Chọn xe --</option>
-                        <% for (Car c : cars) { %>
-                            <option value="<%= c.getCarId() %>"><%= c.getModelName() %></option>
-                        <% } %>
-                    </select>
-                </div>
+                        <div class="mb-3">
+                            <label for="carId" class="form-label">Select Car for Consultation:</label>
+                            <select name="carId" class="form-control mb-2" required>
+                                <option value="">-- Select a car --</option>
+                                <% for (Car c : cars) { %>
+                                <option value="<%= c.getCarId() %>"><%= c.getModelName() %></option>
+                                <% } %>
+                            </select>
+                        </div>
 
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Đăng ký</button>
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
 
-        <!-- Modal Sửa -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <form method="post" action="edit-consultation" class="modal-content">
-                    <div class="modal-header"><h5 class="modal-title">Sửa tư vấn</h5></div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Consultation</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
                     <div class="modal-body">
                         <input type="hidden" name="consultationId" id="editConsultationId"/>
 
-                        <label for="editUserId">Chọn tài khoản người dùng:</label>
+                        <label for="editUserId">Select User Account:</label>
                         <select name="userId" id="editUserId" class="form-control mb-2" onchange="toggleEditPhoneField()">
-                            <option value="">-- Không có tài khoản --</option>
+                            <option value="">-- No Account --</option>
                             <% for (User u : users) { %>
                             <option value="<%= u.getUserId() %>"><%= u.getFullName() %></option>
                             <% } %>
                         </select>
 
-                        <div id="editNameInputGroup" >
-                            <label for="editFullName">Họ và tên:</label>
-                            <input type="text" name="fullName" id="editFullName" class="form-control mb-2" placeholder="Nhập họ tên">
+                        <div id="editNameInputGroup">
+                            <label for="editFullName">Full Name:</label>
+                            <input type="text" name="fullName" id="editFullName" class="form-control mb-2" placeholder="Enter full name">
                         </div>
 
-                        <div id="editPhoneInputGroup" >
-                            <label for="editPhoneNumber">Số điện thoại:</label>
-                            <input type="text" name="phoneNumber" id="editPhoneNumber" class="form-control mb-2" placeholder="Nhập số điện thoại">
+                        <div id="editPhoneInputGroup">
+                            <label for="editPhoneNumber">Phone Number:</label>
+                            <input type="text" name="phoneNumber" id="editPhoneNumber" class="form-control mb-2" placeholder="Enter phone number">
                         </div>
 
-                        <label for="editCarId">Chọn xe:</label>
+                        <label for="editCarId">Select Car:</label>
                         <select name="carId" id="editCarId" class="form-control mb-2" required>
-                            <option value="">-- Chọn xe --</option>
+                            <option value="">-- Select a car --</option>
                             <% for (Car c : cars) { %>
                             <option value="<%= c.getCarId() %>"><%= c.getModelName() %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Cập nhật</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-success">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>

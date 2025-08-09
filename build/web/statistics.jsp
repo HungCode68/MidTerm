@@ -85,19 +85,20 @@
 </head>
 <body>
 
-<h2>📊 Thống kê hoạt động hệ thống VinFast</h2>
+<h2>📊 VinFast System Activity Statistics</h2>
 
 <%
+    // Using a currency formatter for Vietnamese Dong
     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 %>
 
-<!-- Tư vấn -->
+<!-- Consultations -->
 <div class="section">
-    <h3>🚗 Thống kê tư vấn xe</h3>
+    <h3>🚗 Car Consultation Statistics</h3>
     <table>
         <tr>
-            <th>Tên xe</th>
-            <th>Số lượt đăng ký tư vấn</th>
+            <th>Car Name</th>
+            <th>Number of Registrations</th>
         </tr>
         <%
             List<Statistic> consultationStats = (List<Statistic>) request.getAttribute("consultationStats");
@@ -110,19 +111,18 @@
         <% } %>
     </table>
 </div>
-    <h3>Biểu đồ Tư vấn theo tháng</h3>
+<h3>Monthly Consultation Chart</h3>
 <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
     <canvas id="consultationChart" width="400" height="200" style="max-width: 400px; max-height: 200px;"></canvas>
 </div>
 
-
-<!-- Lái thử -->
+<!-- Test Drives -->
 <div class="section">
-    <h3>🛣️ Thống kê lái thử xe</h3>
+    <h3>🛣️ Car Test Drive Statistics</h3>
     <table>
         <tr>
-            <th>Tên xe</th>
-            <th>Số lượt lái thử</th>
+            <th>Car Name</th>
+            <th>Number of Test Drives</th>
         </tr>
         <%
             List<Statistic> testDriveStats = (List<Statistic>) request.getAttribute("testDriveStats");
@@ -135,18 +135,18 @@
         <% } %>
     </table>
 </div>
-    <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-    <h3>Biểu đồ Lái thử xe theo tháng</h3>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+    <h3>Monthly Test Drive Chart</h3>
     <canvas id="testDriveChart" width="400" height="200" style="max-width: 400px; max-height: 200px;"></canvas>
 </div>
 
-<!-- Đặt cọc -->
+<!-- Deposits -->
 <div class="section">
-    <h3>💰 Thống kê đặt cọc xe</h3>
+    <h3>💰 Car Deposit Statistics</h3>
     <table>
         <tr>
-            <th>Tên xe</th>
-            <th>Số lượt đặt cọc</th>
+            <th>Car Name</th>
+            <th>Number of Deposits</th>
         </tr>
         <%
             List<Statistic> depositStats = (List<Statistic>) request.getAttribute("depositStats");
@@ -159,18 +159,18 @@
         <% } %>
     </table>
 </div>
-    <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-    <h3>Biểu đồ Đặt cọc theo tháng</h3>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+    <h3>Monthly Deposit Chart</h3>
     <canvas id="depositChart" width="400" height="200" style="max-width: 400px; max-height: 200px;"></canvas>
 </div>
 
-<!-- Dịch vụ bảo dưỡng -->
+<!-- Maintenance Services -->
 <div class="section">
-    <h3>🛠️ Thống kê dịch vụ bảo dưỡng</h3>
+    <h3>🛠️ Maintenance Service Statistics</h3>
     <table>
         <tr>
-            <th>Tên dịch vụ</th>
-            <th>Số lượt sử dụng</th>
+            <th>Service Name</th>
+            <th>Number of Usages</th>
         </tr>
         <%
             List<Statistic> serviceStats = (List<Statistic>) request.getAttribute("serviceStats");
@@ -183,18 +183,18 @@
         <% } %>
     </table>
 </div>
-    <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-    <h3>Biểu đồ Bảo dưỡng theo tháng</h3>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+    <h3>Monthly Maintenance Chart</h3>
     <canvas id="serviceChart" width="400" height="200" style="max-width: 400px; max-height: 200px;"></canvas>
 </div>
 
-<!-- Doanh thu hóa đơn -->
+<!-- Invoice Revenue -->
 <div class="section">
-    <h3>📈 Doanh thu hóa đơn theo tháng</h3>
+    <h3>📈 Monthly Invoice Revenue</h3>
     <table>
         <tr>
-            <th>Tháng</th>
-            <th>Tổng tiền</th>
+            <th>Month</th>
+            <th>Total Amount</th>
         </tr>
         <%
             List<Statistic> invoiceStats = (List<Statistic>) request.getAttribute("invoiceStats");
@@ -207,15 +207,15 @@
         <% } %>
     </table>
 </div>
-    <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-    <h3>Biểu đồ Hóa đơn theo tháng</h3>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+    <h3>Monthly Invoice Chart</h3>
     <canvas id="invoiceChart" width="400" height="200" style="max-width: 400px; max-height: 200px;"></canvas>
 </div>
     
-
 <div class="footer">
-    &copy; 2025 VinFast | Thống kê hệ thống quản lý
+    &copy; 2025 VinFast | System Management Statistics
 </div>
+
 
 <script>
     // Dữ liệu từ backend

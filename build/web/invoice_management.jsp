@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Quản lý Hóa đơn Dịch vụ</title>
+        <title>Service Invoice Management</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -82,7 +82,7 @@
         </nav>
 
         <div >
-            <h3 class="mb-4">Quản lý Hóa đơn Dịch vụ</h3>
+            <h3 class="mb-4">Service Invoice Management</h3>
 
             <!-- Thông báo -->
             <%
@@ -112,12 +112,12 @@
                         <th>ID</th>
                         <th>User ID</th>
                         <th>Booking ID</th>
-                        <th>Họ tên</th>
-                        <th>SĐT</th>
-                        <th>Tổng tiền</th>
-                        <th>Ngày thanh toán</th>
-                        <th>Trạng thái</th>
-                        <th>Thao tác</th>
+                        <th>Full Name</th>
+                        <th>Phone Number</th>
+                        <th>Total Amount</th>
+                        <th>Payment Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -239,21 +239,20 @@
 
 
 
-        <!-- Modal Sửa -->
         <div class="modal fade" id="editModal" tabindex="-1">
             <div class="modal-dialog">
                 <form method="post" action="edit-invoice" class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Sửa hóa đơn</h5>
+                        <h5 class="modal-title">Edit Invoice</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="invoiceId" id="editId"/>
 
-                        <!-- Select Người dùng (ẩn nếu là khách) -->
                         <div id="editUserSelectWrapper">
-                            <label>Người dùng:</label>
+                            <label>User:</label>
                             <select name="userId" id="editUserId" class="form-control mb-2" onchange="toggleEditFields()">
-                                <option value="">Không có tài khoản</option>
+                                <option value="">No Account</option>
                                 <% if (users != null) {
                             for (User u : users) { %>
                                 <option value="<%= u.getUserId() %>">
@@ -263,44 +262,43 @@
                             </select>
                         </div>
 
-                        <!-- Trường cho khách lẻ -->
                         <div id="editGuestFields">
-                            <label>Họ tên:</label>
+                            <label>Full Name:</label>
                             <input type="text" name="fullName" id="editFullName" class="form-control mb-2"/>
-                            <label>SĐT:</label>
+                            <label>Phone Number:</label>
                             <input type="text" name="phoneNumber" id="editPhoneNumber" class="form-control mb-2"/>
 
-                            <label>Dịch vụ:</label>
+                            <label>Service:</label>
                             <select name="serviceId" id="editServiceId" class="form-control mb-2">
                                 <% if (services != null) {
-           for (MaintenanceService s : services) { %>
+                           for (MaintenanceService s : services) { %>
                                 <option value="<%= s.getServiceId() %>"><%= s.getServiceName() %></option>
                                 <% }} %>
                             </select>
-
                         </div>
 
-                        <!-- Trường cho người dùng có tài khoản -->
-                        <div id="editBookingField">
-                            <label>Booking ID:</label>
-                            <input type="number" name="bookingId" id="editBookingId" class="form-control mb-2"/>
+                        <div id="editBookingField" style="display: none;">
+                            <label>Booking:</label>
+                            <select name="bookingId" class="form-control mb-2">
+                                <option value="">-- Select a booking --</option>
+                            </select>
                         </div>
 
-                        <label>Tổng tiền:</label>
+                        <label>Total Amount:</label>
                         <input type="number" name="totalAmount" step="0.01" id="editTotal" class="form-control mb-2" required/>
 
-                        <label>Ngày thanh toán:</label>
+                        <label>Payment Date:</label>
                         <input type="date" name="paymentDate" id="editDate" class="form-control mb-2" required/>
 
-                        <label>Trạng thái:</label>
+                        <label>Status:</label>
                         <select name="status" id="editStatus" class="form-control mb-2">
-                            <option value="completed">Đã thanh toán</option>
-                            <option value="unpaid">Chưa thanh toán</option>
+                            <option value="completed">Paid</option>
+                            <option value="unpaid">Unpaid</option>
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-warning" type="submit">Cập nhật</button>
-                        <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button class="btn btn-warning" type="submit">Update</button>
+                        <button class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
@@ -316,63 +314,63 @@
                     for (int i = 0; i < allBookings.size(); i++) {
                         model.MaintenanceBooking booking = allBookings.get(i);
             %>
-                        {
-                            bookingId: <%= booking.getBookingId() %>,
-                            userId: <%= booking.getUserId() %>,
-                            serviceName: "<%= booking.getServiceName() %>",
-                            scheduledTime: "<%= booking.getScheduledTime() %>"
-                        }<%= (i < allBookings.size() - 1) ? "," : "" %>
+            {
+            bookingId: <%= booking.getBookingId() %>,
+                    userId: <%= booking.getUserId() %>,
+                    serviceName: "<%= booking.getServiceName() %>",
+                    scheduledTime: "<%= booking.getScheduledTime() %>"
+            }<%= (i < allBookings.size() - 1) ? "," : "" %>
             <%
                     }
                 }
             %>
-        ];
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            // Gọi hàm khi trang web tải xong để thiết lập trạng thái ban đầu
-            toggleGuestFields();
-        });
+            ];
 
-        function toggleGuestFields() {
-            var userSelect = document.getElementById("userSelect");
-            var guestFields = document.getElementById("guestFields");
-            var bookingField = document.getElementById("bookingField");
-            
-            const bookingSelect = document.querySelector("select[name='bookingId']");
-            
-            if (userSelect.value === "") {
-                // Nếu không có người dùng nào được chọn, hiển thị trường khách và ẩn trường booking
-                guestFields.style.display = "block";
-                bookingField.style.display = "none";
-                bookingSelect.innerHTML = "<option value=''>-- Chọn booking --</option>";
-            } else {
-                // Nếu có người dùng, ẩn trường khách và hiển thị trường booking
-                guestFields.style.display = "none";
-                bookingField.style.display = "block";
-                
-                // Lọc danh sách booking dựa trên userId đã chọn
-                const selectedUserId = parseInt(userSelect.value);
-                const filteredBookings = allBookings.filter(booking => booking.userId === selectedUserId);
+            document.addEventListener('DOMContentLoaded', function () {
+                // Gọi hàm khi trang web tải xong để thiết lập trạng thái ban đầu
+                toggleGuestFields();
+            });
 
-                // Xóa các tùy chọn cũ
-                bookingSelect.innerHTML = "<option value=''>-- Chọn booking --</option>";
-                
-                if (filteredBookings.length === 0) {
-                    const option = document.createElement("option");
-                    option.text = "Không có booking nào";
-                    option.disabled = true;
-                    option.selected = true;
-                    bookingSelect.appendChild(option);
+            function toggleGuestFields() {
+                var userSelect = document.getElementById("userSelect");
+                var guestFields = document.getElementById("guestFields");
+                var bookingField = document.getElementById("bookingField");
+
+                const bookingSelect = document.querySelector("select[name='bookingId']");
+
+                if (userSelect.value === "") {
+                    // Nếu không có người dùng nào được chọn, hiển thị trường khách và ẩn trường booking
+                    guestFields.style.display = "block";
+                    bookingField.style.display = "none";
+                    bookingSelect.innerHTML = "<option value=''>-- Chọn booking --</option>";
                 } else {
-                    filteredBookings.forEach(booking => {
+                    // Nếu có người dùng, ẩn trường khách và hiển thị trường booking
+                    guestFields.style.display = "none";
+                    bookingField.style.display = "block";
+
+                    // Lọc danh sách booking dựa trên userId đã chọn
+                    const selectedUserId = parseInt(userSelect.value);
+                    const filteredBookings = allBookings.filter(booking => booking.userId === selectedUserId);
+
+                    // Xóa các tùy chọn cũ
+                    bookingSelect.innerHTML = "<option value=''>-- Chọn booking --</option>";
+
+                    if (filteredBookings.length === 0) {
                         const option = document.createElement("option");
-                        option.value = booking.bookingId;
-                        option.text = booking.bookingId + " - " + booking.serviceName + " - " + booking.scheduledTime;
+                        option.text = "Không có booking nào";
+                        option.disabled = true;
+                        option.selected = true;
                         bookingSelect.appendChild(option);
-                    });
+                    } else {
+                        filteredBookings.forEach(booking => {
+                            const option = document.createElement("option");
+                            option.value = booking.bookingId;
+                            option.text = booking.bookingId + " - " + booking.serviceName + " - " + booking.scheduledTime;
+                            bookingSelect.appendChild(option);
+                        });
+                    }
                 }
             }
-        }
 
             // Khi tải lại modal
             $(document).ready(function () {
@@ -383,6 +381,10 @@
                 const userId = document.getElementById("editUserId").value;
                 const guestFields = document.getElementById("editGuestFields");
                 const bookingField = document.getElementById("editBookingField");
+                const bookingSelect = document.querySelector("#editBookingField select[name='bookingId']");
+
+                // Xóa các tùy chọn cũ trước khi xử lý
+                bookingSelect.innerHTML = '<option value="">-- Chọn booking --</option>';
 
                 if (userId === "") {
                     guestFields.style.display = "block";
@@ -390,24 +392,63 @@
                 } else {
                     guestFields.style.display = "none";
                     bookingField.style.display = "block";
+
+                    const selectedUserId = parseInt(userId);
+
+                    // Lọc danh sách booking, đảm bảo userId là một số hợp lệ
+                    const userBookings = allBookings.filter(booking => {
+                        return booking.userId != null && parseInt(booking.userId) === selectedUserId;
+                    });
+
+                    if (userBookings.length === 0) {
+                        const option = document.createElement("option");
+                        option.text = "Không có booking nào";
+                        option.disabled = true;
+                        option.selected = true;
+                        bookingSelect.appendChild(option);
+                    } else {
+                        userBookings.forEach(booking => {
+                            const option = document.createElement("option");
+                            option.value = booking.bookingId;
+                            // Đảm bảo các thuộc tính này tồn tại trước khi sử dụng
+                            const serviceName = booking.serviceName || 'N/A';
+                            const scheduledTime = booking.scheduledTime || 'N/A';
+
+                            option.text = booking.bookingId + " - " + booking.serviceName + " - " + booking.scheduledTime;
+                            bookingSelect.appendChild(option);
+                        });
+                    }
                 }
             }
 
             function showEditModal(id, userId, bookingId, total, date, status, fullName, phoneNumber, serviceId) {
                 $('#editId').val(id);
-                $('#editUserId').val(userId || "");
-
-                // Set giá trị userId trước khi gọi toggle
-                toggleEditFields();
-
-                $('#editBookingId').val(bookingId || "");
                 $('#editTotal').val(total);
                 $('#editDate').val(date);
                 $('#editStatus').val(status);
 
-                $('#editFullName').val(fullName || "");
-                $('#editPhoneNumber').val(phoneNumber || "");
-                $('#editServiceId').val(serviceId || "");
+                const editUserIdElement = document.getElementById("editUserId");
+                editUserIdElement.value = userId || "";
+
+                // Set values for guest fields if no userId exists, otherwise clear them
+                if (!userId || userId === "") {
+                    $('#editFullName').val(fullName || "");
+                    $('#editPhoneNumber').val(phoneNumber || "");
+                    // THIS IS THE NEW LINE: explicitly set the value of the service dropdown
+                    $('#editServiceId').val(serviceId || "");
+                } else {
+                    $('#editFullName').val("");
+                    $('#editPhoneNumber').val("");
+                    $('#editServiceId').val("");
+                }
+
+                // Luôn luôn gọi toggleEditFields để cập nhật modal dựa trên userId đã set
+                toggleEditFields();
+
+                // Sau khi dropdown đã được populate, hãy chọn bookingId chính xác
+                if (bookingId) {
+                    document.querySelector("#editBookingField select[name='bookingId']").value = bookingId;
+                }
 
                 $('#editModal').modal('show');
             }

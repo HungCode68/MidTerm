@@ -22,57 +22,57 @@
 
     </head>
     <body >
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
-    <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold text-white" href="#">
-            <i class="fas fa-tools mr-1"></i> Management Page
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
+            <div class="container-fluid">
+                <a class="navbar-brand font-weight-bold text-white" href="#">
+                    <i class="fas fa-tools mr-1"></i> Management Page
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
-                </li>
-            </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
+                            <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
+                        </li>
+                    </ul>
 
-            <span class="navbar-text ml-auto text-white">
-                <i class="fas fa-user-circle mr-1"></i>
-                Hello, <strong><%= currentUser.getFullName() %></strong>
-            </span>
-        </div>
-    </div>
-</nav>
+                    <span class="navbar-text ml-auto text-white">
+                        <i class="fas fa-user-circle mr-1"></i>
+                        Hello, <strong><%= currentUser.getFullName() %></strong>
+                    </span>
+                </div>
+            </div>
+        </nav>
 
 
         <h2 class="mb-4">Quản lý lịch bảo dưỡng</h2>
@@ -98,17 +98,17 @@
             <thead class="bg-white text-dark text-center">
                 <tr>
                     <th>ID</th>
-                    <th>Họ tên</th>
-                    <th>Điện thoại</th>
-                    <th>Xe</th>
-                    <th>Biển số</th>
-                    <th>Km</th>
-                    <th>Dịch vụ</th>
-                    <th>Tỉnh</th>
-                    <th>Huyện</th>
-                    <th>Thời gian hẹn</th>
-                    <th>Trạng thái</th>
-                    <th>Thao tác</th>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>Car</th>
+                    <th>License Plate</th>
+                    <th>Odometer (km)</th>
+                    <th>Service</th>
+                    <th>Province</th>
+                    <th>District</th>
+                    <th>Appointment Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
