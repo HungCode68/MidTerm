@@ -22,10 +22,10 @@
 
     </head>
     <body >
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
     <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold" href="#">
-            <i class="fas fa-tools mr-1"></i> Trang quản lý
+        <a class="navbar-brand font-weight-bold text-white" href="#">
+            <i class="fas fa-tools mr-1"></i> Management Page
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,46 +35,46 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Quản lý tài khoản</a>
+                    <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Quản lý xe</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Quản lý tư vấn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Đăng ký lái thử</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Đặt cọc</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Dịch vụ bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Đặt lịch bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Quản lý cửa hàng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Hóa đơn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Thống kê</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
                 </li>
             </ul>
 
-            <span class="navbar-text ml-auto text-light">
+            <span class="navbar-text ml-auto text-white">
                 <i class="fas fa-user-circle mr-1"></i>
-                Xin chào, <strong><%= currentUser.getFullName() %></strong>
+                Hello, <strong><%= currentUser.getFullName() %></strong>
             </span>
         </div>
     </div>
 </nav>
 
-        
+
         <h2 class="mb-4">Quản lý lịch bảo dưỡng</h2>
 
         <!-- Bộ lọc -->
@@ -94,8 +94,8 @@
         </form>
 
         <!-- Bảng danh sách -->
-        <table class="table table-bordered table-hover">
-            <thead class="table-dark">
+        <table class="table table-bordered table-striped">
+            <thead class="bg-white text-dark text-center">
                 <tr>
                     <th>ID</th>
                     <th>Họ tên</th>
@@ -130,7 +130,7 @@
                     <td><%= b.getScheduledTime() %></td>
                     <td><%= b.getStatus() %></td>
                     <td>
-                        <button class="btn btn-primary btn-sm"
+                        <button class="btn btn-info btn-sm text-white"
                                 data-bs-toggle="modal"
                                 data-bs-target="#editModal"
                                 onclick="openEditModal(this)"
@@ -159,22 +159,22 @@
             </tbody>
         </table>
 
-        <!-- Modal Thêm -->
+        <!-- Modal Add -->
         <div class="modal fade" id="addModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <form action="add-booking" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Thêm lịch bảo dưỡng</h5>
+                            <h5 class="modal-title">Add Maintenance Schedule</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body row g-3">
 
-                            <!-- Chọn tài khoản -->
+                            <!-- Select user account -->
                             <div class="col-md-12">
-                                <label>Tài khoản người dùng:</label>
+                                <label>User Account:</label>
                                 <select class="form-select" name="userId" id="userSelect" onchange="toggleUserFields()">
-                                    <option value="">-- Không có tài khoản --</option>
+                                    <option value="">-- No account --</option>
                                     <%
                                         List<model.User> users = (List<model.User>) request.getAttribute("userAccounts");
                                         if (users != null) {
@@ -188,49 +188,50 @@
                                 </select>
                             </div>
 
-                            <!-- Họ tên & SĐT -->
+                            <!-- Full name & Phone -->
                             <div class="col-md-6 user-field">
-                                <label>Họ tên:</label>
-                                <input type="text" name="fullName" class="form-control">
+                                <label>Full Name:</label>
+                                <input type="text" name="fullName" class="form-control" placeholder="Enter full name">
                             </div>
 
                             <div class="col-md-6 user-field">
-                                <label>Điện thoại:</label>
-                                <input type="text" name="phoneNumber" class="form-control">
+                                <label>Phone Number:</label>
+                                <input type="text" name="phoneNumber" class="form-control" placeholder="Enter phone number">
                             </div>
 
                             <!-- Car model -->
                             <div class="col-md-6">
-                                <label>Xe:</label>
+                                <label>Car Model:</label>
                                 <select name="carModel" class="form-control mb-2" required>
-                                    <option value="">-- Chọn mẫu xe --</option>
+                                    <option value="">-- Select car model --</option>
                                     <% if (carList != null) {
                                 for (Car car : carList) { %>
                                     <option value="<%= car.getModelName() %>">
                                         <%= car.getModelName() %> - <%= car.getDescription() %>
                                     </option>
                                     <% }} else { %>
-                                    <option disabled>Không có xe nào</option>
+                                    <option disabled>No car available</option>
                                     <% } %>
                                 </select>
                             </div>
 
                             <!-- License Plate -->
                             <div class="col-md-6">
-                                <label>Biển số:</label>
-                                <input type="text" name="licensePlate" class="form-control" required>
+                                <label>License Plate:</label>
+                                <input type="text" name="licensePlate" class="form-control" placeholder="Enter license plate" required>
                             </div>
 
+                            <!-- Kilometer -->
                             <div class="col-md-6">
-                                <label>Số km:</label>
-                                <input type="number" name="kilometer" class="form-control" required>
+                                <label>Odometer (km):</label>
+                                <input type="number" name="kilometer" class="form-control" placeholder="Enter kilometers" required>
                             </div>
 
-                            <!-- Dịch vụ -->
+                            <!-- Service -->
                             <div class="col-md-6">
-                                <label>Dịch vụ:</label>
+                                <label>Service:</label>
                                 <select name="serviceId" class="form-select" required>
-                                    <option value="">-- Chọn dịch vụ --</option>
+                                    <option value="">-- Select service --</option>
                                     <%
                                         List<model.MaintenanceService> services = (List<model.MaintenanceService>) request.getAttribute("services");
                                         if (services != null) {
@@ -244,69 +245,73 @@
                                 </select>
                             </div>
 
+                            <!-- Province -->
                             <div class="col-md-6">
-                                <label>Tỉnh:</label>
-                                <input type="text" name="province" class="form-control" required>
+                                <label>Province:</label>
+                                <input type="text" name="province" class="form-control" placeholder="Enter province" required>
                             </div>
 
+                            <!-- District -->
                             <div class="col-md-6">
-                                <label>Huyện:</label>
-                                <input type="text" name="district" class="form-control" required>
+                                <label>District:</label>
+                                <input type="text" name="district" class="form-control" placeholder="Enter district" required>
                             </div>
 
+                            <!-- Schedule time -->
                             <div class="col-md-12">
-                                <label>Thời gian hẹn:</label>
+                                <label>Scheduled Time:</label>
                                 <input type="datetime-local" name="scheduledTime" class="form-control" required>
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-success" type="submit">Lưu</button>
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                            <button class="btn btn-success" type="submit">Save</button>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Modal Sửa -->
+
+        <!-- Edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <form action="edit-booking" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Cập nhật lịch bảo dưỡng</h5>
+                            <h5 class="modal-title">Update Maintenance Schedule</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body row g-3">
                             <input type="hidden" name="bookingId" id="editBookingId">
 
                             <div class="col-md-6">
-                                <label>Họ tên:</label>
+                                <label>Full Name:</label>
                                 <input type="text" name="fullName" id="editFullName" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label>Điện thoại:</label>
+                                <label>Phone Number:</label>
                                 <input type="text" name="phoneNumber" id="editPhoneNumber" class="form-control">
                             </div>
 
                             <div class="col-md-6">
-                                <label>Mẫu xe:</label>
+                                <label>Car Model:</label>
                                 <input type="text" name="carModel" id="editCarModel" class="form-control">
                             </div>
 
                             <div class="col-md-6">
-                                <label>Biển số:</label>
+                                <label>License Plate:</label>
                                 <input type="text" name="licensePlate" id="editLicensePlate" class="form-control">
                             </div>
 
                             <div class="col-md-6">
-                                <label>Số km:</label>
+                                <label>Kilometers:</label>
                                 <input type="number" name="kilometer" id="editKilometer" class="form-control">
                             </div>
 
                             <div class="col-md-6">
-                                <label>Dịch vụ:</label>
+                                <label>Service:</label>
                                 <select name="serviceId" id="editServiceId" class="form-select">
                                     <%
                                         if (services != null) {
@@ -321,35 +326,36 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label>Tỉnh:</label>
+                                <label>Province:</label>
                                 <input type="text" name="province" id="editProvince" class="form-control">
                             </div>
                             <div class="col-md-6">
-                                <label>Huyện:</label>
+                                <label>District:</label>
                                 <input type="text" name="district" id="editDistrict" class="form-control">
                             </div>
 
                             <div class="col-md-6">
-                                <label>Trạng thái:</label>
-                                <input type="text" name="status" id="editStatus" class="form-control">
+                                <label>Status:</label>
+                                <select name="status" id="editStatus" class="form-select">
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
                             </div>
 
                             <div class="col-md-6">
-                                <label>Thời gian hẹn:</label>
+                                <label>Scheduled Time:</label>
                                 <input type="datetime-local" name="scheduledTime" id="editScheduledTime" class="form-control">
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-success" type="submit">Cập nhật</button>
-                            <button class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                            <button class="btn btn-success" type="submit">Update</button>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-
 
         <!-- JS xử lý -->
         <script>
@@ -378,8 +384,18 @@
                 document.getElementById('editServiceId').value = button.dataset.serviceId;
                 document.getElementById('editProvince').value = button.dataset.province;
                 document.getElementById('editDistrict').value = button.dataset.district;
-                document.getElementById('editStatus').value = button.dataset.status;
 
+                // Set selected status option
+                const status = button.dataset.status;
+                const statusSelect = document.getElementById('editStatus');
+                for (let i = 0; i < statusSelect.options.length; i++) {
+                    if (statusSelect.options[i].value === status) {
+                        statusSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+
+                // Format datetime
                 const datetime = button.dataset.scheduledTime.replace(' ', 'T').substring(0, 16);
                 document.getElementById('editScheduledTime').value = datetime;
             }

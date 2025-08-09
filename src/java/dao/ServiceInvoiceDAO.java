@@ -5,11 +5,15 @@
 package dao;
 import context.DBContext;
 import model.ServiceInvoice;
-
+import java.sql.Connection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import model.MaintenanceBooking;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author Nguyễn Hùng
@@ -183,6 +187,30 @@ public class ServiceInvoiceDAO {
 
     return list;
 }
+   
+   public List<MaintenanceBooking> getBookingsByUserId(int userId) throws Exception {
+    List<MaintenanceBooking> list = new ArrayList<>();
+    String sql = "SELECT * FROM MaintenanceBooking WHERE userId = ?";
+
+    try (Connection connection = new DBContext().getConnection();
+         PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+        stmt.setInt(1, userId);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            MaintenanceBooking b = new MaintenanceBooking();
+            b.setBookingId(rs.getInt("bookingId"));
+            b.setUserId(rs.getInt("userId"));
+            b.setServiceName(rs.getString("serviceName")); // đảm bảo có cột này
+            list.add(b);
+        }
+    }
+
+    return list;
+}
+
+
 
 
     // Hàm tiện ích để map ResultSet sang đối tượng ServiceInvoice

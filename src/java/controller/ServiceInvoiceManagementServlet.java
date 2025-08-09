@@ -24,7 +24,10 @@ import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import model.MaintenanceBooking;
+import model.MaintenanceService;
 import model.ServiceInvoice;
+import model.User;
 
 /**
  *
@@ -35,11 +38,12 @@ import model.ServiceInvoice;
     "/add-invoice", // thêm
     "/edit-invoice", // sửa
     "/delete-invoice", // xoá
-    "/filter-invoice" // lọc
+    "/filter-invoice"
+// lọc
 })
 public class ServiceInvoiceManagementServlet extends HttpServlet {
 
-    private final ServiceInvoiceDAO invoiceDAO = new ServiceInvoiceDAO();
+    private  ServiceInvoiceDAO invoiceDAO = new ServiceInvoiceDAO();
     private UserDAO userDAO = new UserDAO();
     private MaintenanceServiceDAO serviceDAO;
     private MaintenanceBookingDAO bookingDAO;
@@ -86,61 +90,122 @@ public class ServiceInvoiceManagementServlet extends HttpServlet {
             userDAO = new UserDAO();
             bookingDAO = new MaintenanceBookingDAO(conn);
             serviceDAO = new MaintenanceServiceDAO(conn);
+            
         } catch (Exception e) {
             throw new ServletException("Không thể kết nối CSDL", e);
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String action = request.getServletPath();
-        HttpSession session = request.getSession();
+ @Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    String action = request.getServletPath();
+    HttpSession session = request.getSession();
 
-        try {
-            switch (action) {
-                case "/delete-invoice":
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    invoiceDAO.deleteInvoice(id);
-                    session.setAttribute("success", "Xóa hóa đơn thành công!");
-                    response.sendRedirect("dashboard-invoices");
-                    break;
-
-                case "/filter-invoice":
-                    String phone = request.getParameter("phone");
-                    String dateStr = request.getParameter("date");
-
-                    Date date = null;
-                    if (dateStr != null && !dateStr.isEmpty()) {
-                        date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+    try {
+        // Lấy tất cả dữ liệu cần thiết và truyền sang JSP
+        List<ServiceInvoice> invoiceList = invoiceDAO.getAllInvoices();
+        List<User> users = userDAO.getAllUsers();
+        List<MaintenanceBooking> allBookings = bookingDAO.getAllBookings(); // Lấy tất cả booking
+        List<MaintenanceService> services = serviceDAO.getAllServices(); // Lấy tất cả dịch vụ
+        
+        request.setAttribute("users", users);
+        request.setAttribute("services", services); // Truyền danh sách dịch vụ đã lấy
+        request.setAttribute("allBookings", allBookings);
+        
+        // Bổ sung: Lấy thông tin user và serviceName (nếu có) để hiển thị trong bảng
+        for (ServiceInvoice invoice : invoiceList) {
+            // Lấy thông tin user
+            if (invoice.getUserId() != null) {
+                for (User user : users) {
+                    if (user.getUserId() == invoice.getUserId()) {
+                        invoice.setFullName(user.getFullName());
+                        invoice.setPhoneNumber(user.getPhoneNumber());
+                        break;
                     }
-                    List<ServiceInvoice> filteredList = invoiceDAO.filterInvoices(phone, date);
-
-                    request.setAttribute("invoiceList", filteredList);
-                    request.setAttribute("filterPhone", phone);
-                    request.setAttribute("users", userDAO.getAllUsers());
-                    request.setAttribute("filterDate", dateStr);
-                    request.setAttribute("services", serviceDAO.getAllServices()); // DAO bạn cần có method getAllServices()
-                    request.setAttribute("bookings", bookingDAO.getAllBookings());
-                    request.getRequestDispatcher("invoice_management.jsp").forward(request, response);
-                    break;
-
-                default: // "/admin/invoices"
-                    List<ServiceInvoice> allInvoices = invoiceDAO.getAllInvoices();
-                    request.setAttribute("invoiceList", allInvoices);
-                    request.setAttribute("users", userDAO.getAllUsers());
-                    request.setAttribute("services", serviceDAO.getAllServices()); // DAO bạn cần có method getAllServices()
-                    request.setAttribute("bookings", bookingDAO.getAllBookings());
-                    request.getRequestDispatcher("invoice_management.jsp").forward(request, response);
-                    break;
+                }
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.setAttribute("error", "Lỗi: " + e.getMessage());
-            response.sendRedirect("dashboard-invoices");
+            
+            // Lấy tên dịch vụ từ bookingId hoặc serviceId
+            if (invoice.getBookingId() != null) {
+                for (MaintenanceBooking booking : allBookings) {
+                    if (booking.getBookingId() == invoice.getBookingId()) {
+                        invoice.setServiceName(booking.getServiceName());
+                        break;
+                    }
+                }
+            } else if (invoice.getServiceId() != null) { // Trường hợp hóa đơn không có bookingId (khách)
+                for (MaintenanceService service : services) {
+                    if (service.getServiceId() == invoice.getServiceId()) {
+                        invoice.setServiceName(service.getServiceName());
+                        break;
+                    }
+                }
+            }
         }
+        request.setAttribute("invoiceList", invoiceList);
+
+        switch (action) {
+            case "/delete-invoice":
+                int id = Integer.parseInt(request.getParameter("id"));
+                invoiceDAO.deleteInvoice(id);
+                session.setAttribute("success", "Xóa hóa đơn thành công!");
+                response.sendRedirect("dashboard-invoices");
+                break;
+
+            case "/filter-invoice":
+                String phone = request.getParameter("phone");
+                String dateStr = request.getParameter("date");
+                Date date = null;
+                if (dateStr != null && !dateStr.isEmpty()) {
+                    date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
+                }
+                List<ServiceInvoice> filteredList = invoiceDAO.filterInvoices(phone, date);
+
+                // Bổ sung: Lấy thông tin user và serviceName cho danh sách đã lọc
+                for (ServiceInvoice invoice : filteredList) {
+                    // Lấy thông tin user
+                    if (invoice.getUserId() != null) {
+                        for (User user : users) {
+                            if (user.getUserId() == invoice.getUserId()) {
+                                invoice.setFullName(user.getFullName());
+                                invoice.setPhoneNumber(user.getPhoneNumber());
+                                break;
+                            }
+                        }
+                    }
+                    // Lấy tên dịch vụ từ bookingId hoặc serviceId
+                    if (invoice.getBookingId() != null) {
+                        for (MaintenanceBooking booking : allBookings) {
+                            if (booking.getBookingId() == invoice.getBookingId()) {
+                                invoice.setServiceName(booking.getServiceName());
+                                break;
+                            }
+                        }
+                    } else if (invoice.getServiceId() != null) {
+                        for (MaintenanceService service : services) {
+                            if (service.getServiceId() == invoice.getServiceId()) {
+                                invoice.setServiceName(service.getServiceName());
+                                break;
+                            }
+                        }
+                    }
+                }
+                request.setAttribute("invoiceList", filteredList);
+                request.setAttribute("filterPhone", phone);
+                request.setAttribute("filterDate", dateStr);
+                request.getRequestDispatcher("invoice_management.jsp").forward(request, response);
+                break;
+            default: // "/dashboard-invoices"
+                request.getRequestDispatcher("invoice_management.jsp").forward(request, response);
+                break;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        session.setAttribute("error", "Lỗi: " + e.getMessage());
+        response.sendRedirect("dashboard-invoices");
     }
+}
 
     /**
      * Handles the HTTP <code>POST</code> method.

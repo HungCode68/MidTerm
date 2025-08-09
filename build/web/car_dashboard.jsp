@@ -23,10 +23,10 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
     <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold" href="#">
-            <i class="fas fa-tools mr-1"></i> Trang quản lý
+        <a class="navbar-brand font-weight-bold text-white" href="#">
+            <i class="fas fa-tools mr-1"></i> Management Page
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,40 +36,40 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Quản lý tài khoản</a>
+                    <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Quản lý xe</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Quản lý tư vấn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Đăng ký lái thử</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Đặt cọc</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Dịch vụ bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Đặt lịch bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Quản lý cửa hàng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Hóa đơn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Thống kê</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
                 </li>
             </ul>
 
-            <span class="navbar-text ml-auto text-light">
+            <span class="navbar-text ml-auto text-white">
                 <i class="fas fa-user-circle mr-1"></i>
-                Xin chào, <strong><%= currentUser.getFullName() %></strong>
+                Hello, <strong><%= currentUser.getFullName() %></strong>
             </span>
         </div>
     </div>
@@ -105,7 +105,7 @@
 
     <!-- Bảng xe -->
     <table class="table table-bordered table-striped">
-        <thead class="thead-dark text-center">
+        <thead class="bg-white text-dark text-center">
         <tr>
             <th>STT</th>
             <th>Tên xe</th>
@@ -129,7 +129,7 @@
             <td><%= car.getDescription() %></td>
             <td><%= car.getSpecifications() %></td>
             <td class="text-center">
-                <button class="btn btn-success btn-sm"
+                <button class="btn btn-info btn-sm text-white"
                         data-toggle="modal"
                         data-target="#editModal"
                         onclick="fillEditForm('<%= car.getCarId() %>', '<%= car.getModelName() %>', '<%= car.getPrice() %>', '<%= car.getImageUrl() %>', '<%= car.getDescription() %>', '<%= car.getSpecifications() %>')">

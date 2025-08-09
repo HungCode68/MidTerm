@@ -115,13 +115,20 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         String phone = request.getParameter("phone");
         String status = request.getParameter("status");
 
-        String dayStr = request.getParameter("day");
-        String monthStr = request.getParameter("month");
-        String yearStr = request.getParameter("year");
+        // Thay đổi: Lấy tham số depositDate từ form
+        String depositDateStr = request.getParameter("depositDate");
 
-        Integer day = (dayStr != null && !dayStr.isEmpty()) ? Integer.parseInt(dayStr) : null;
-        Integer month = (monthStr != null && !monthStr.isEmpty()) ? Integer.parseInt(monthStr) : null;
-        Integer year = (yearStr != null && !yearStr.isEmpty()) ? Integer.parseInt(yearStr) : null;
+        Integer day = null;
+        Integer month = null;
+        Integer year = null;
+        
+        // Thay đổi: Phân tích chuỗi ngày để lấy ngày, tháng, năm
+        if (depositDateStr != null && !depositDateStr.isEmpty()) {
+            java.time.LocalDate date = java.time.LocalDate.parse(depositDateStr);
+            day = date.getDayOfMonth();
+            month = date.getMonthValue();
+            year = date.getYear();
+        }
 
         // Gọi DAO có chứa JOIN đầy đủ thông tin
         List<Deposit> deposits;
@@ -141,9 +148,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
         request.setAttribute("phone", phone);
         request.setAttribute("status", status);
-        request.setAttribute("day", day);
-        request.setAttribute("month", month);
-        request.setAttribute("year", year);
+        // Thay đổi: Gửi chuỗi ngày đã lọc sang JSP để giữ lại giá trị trên form
+        request.setAttribute("depositDate", depositDateStr); 
 
         request.getRequestDispatcher("deposit_management.jsp").forward(request, response);
 

@@ -115,24 +115,25 @@ public class MaintenanceBookingDAO {
 
 
     public List<MaintenanceBooking> getAllBookings() throws SQLException {
-    List<MaintenanceBooking> list = new ArrayList<>();
-    String sql = """
-        SELECT b.*, s.ServiceName 
-        FROM MaintenanceBookings b 
-        LEFT JOIN MaintenanceServices s ON b.ServiceId = s.ServiceId
-        ORDER BY b.CreatedAt DESC
-    """;
-    try (PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
+        List<MaintenanceBooking> list = new ArrayList<>();
+        String sql = """
+                     SELECT b.*, s.ServiceName 
+                     FROM MaintenanceBookings b 
+                     LEFT JOIN MaintenanceServices s ON b.ServiceId = s.ServiceId
+                     ORDER BY b.CreatedAt DESC
+                     """;
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
-        while (rs.next()) {
-            MaintenanceBooking booking = mapResultSetToBooking(rs);
-            booking.setServiceName(rs.getString("ServiceName")); // <-- thêm dòng này
-            list.add(booking);
+            while (rs.next()) {
+                MaintenanceBooking booking = mapResultSetToBooking(rs);
+                // Dòng này được thêm vào để lấy ServiceName từ ResultSet
+                booking.setServiceName(rs.getString("ServiceName")); 
+                list.add(booking);
+            }
         }
+        return list;
     }
-    return list;
-}
 
 
     // Lấy tất cả lịch bảo dưỡng theo UserId
@@ -169,6 +170,7 @@ public class MaintenanceBookingDAO {
         booking.setPhoneNumber(rs.getString("PhoneNumber"));
         booking.setFullName(rs.getString("FullName"));
          booking.setStatus(rs.getString("Status"));
+        booking.setServiceName(rs.getString("ServiceName"));
         return booking;
     }
 }

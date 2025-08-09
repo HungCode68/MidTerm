@@ -58,10 +58,10 @@ public class DepositDAO {
 
         try (Connection conn = DBContext.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            if (deposit.getUserId() > 0) {
+            if (deposit.getUserId() != null) {
                 stmt.setInt(1, deposit.getUserId());
             } else {
-                stmt.setNull(1, Types.INTEGER);
+                stmt.setNull(1, java.sql.Types.INTEGER);
             }
 
             stmt.setInt(2, deposit.getCarId());

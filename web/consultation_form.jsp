@@ -294,13 +294,13 @@
                     <div class="dropdown-content">
                         <a href="<%=contextPath%>/warrantyinformation.jsp">Thông tin bảo hành</a>
                         <a href="<%=contextPath%>/maintenance">Thông tin bảo dưỡng định kỳ</a>
-                        <a href="<%=contextPath%>/maintenance">Thông tin dịch vụ</a>
+                        
                     </div>
                 </div>
                 <div class="dropdown">
                     <a href="<%=contextPath%>/#">Pin và trạm sạc</a>
                     <div class="dropdown-content">
-                        <a href="<%=contextPath%>/charging-stations">Trạm sạc ô tô điện</a>
+                        <a href="<%=contextPath%>/charging_station.jsp">Trạm sạc ô tô điện</a>
                     </div>
                 </div>
             </div>

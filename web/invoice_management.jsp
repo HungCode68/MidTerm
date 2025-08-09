@@ -29,58 +29,58 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-    <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold" href="#">
-            <i class="fas fa-tools mr-1"></i> Trang quản lý
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
+            <div class="container-fluid">
+                <a class="navbar-brand font-weight-bold text-white" href="#">
+                    <i class="fas fa-tools mr-1"></i> Management Page
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Quản lý tài khoản</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Quản lý xe</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Quản lý tư vấn</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Đăng ký lái thử</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Đặt cọc</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Dịch vụ bảo dưỡng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Đặt lịch bảo dưỡng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Quản lý cửa hàng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Hóa đơn</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Thống kê</a>
-                </li>
-            </ul>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
+                            <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
+                        </li>
+                    </ul>
 
-            <span class="navbar-text ml-auto text-light">
-                <i class="fas fa-user-circle mr-1"></i>
-                Xin chào, <strong><%= currentUser.getFullName() %></strong>
-            </span>
-        </div>
-    </div>
-</nav>
-        
+                    <span class="navbar-text ml-auto text-white">
+                        <i class="fas fa-user-circle mr-1"></i>
+                        Hello, <strong><%= currentUser.getFullName() %></strong>
+                    </span>
+                </div>
+            </div>
+        </nav>
+
         <div >
             <h3 class="mb-4">Quản lý Hóa đơn Dịch vụ</h3>
 
@@ -102,12 +102,12 @@
                 <input type="date" name="date" class="form-control mr-2"
                        value="<%= request.getAttribute("filterDate") != null ? request.getAttribute("filterDate") : "" %>" />
                 <button class="btn btn-secondary" type="submit">Lọc</button>
-                 <a href="dashboard-invoices" class="btn btn-secondary ml-2">Xoá bộ lọc</a>
+                <a href="dashboard-invoices" class="btn btn-secondary ml-2">Xoá bộ lọc</a>
             </form>
 
             <!-- Bảng hóa đơn -->
             <table class="table table-bordered">
-                <thead class="table-dark">
+                <thead class="bg-white text-dark text-center">
                     <tr>
                         <th>ID</th>
                         <th>User ID</th>
@@ -121,7 +121,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                     <%
                         List<ServiceInvoice> invoiceList = (List<ServiceInvoice>) request.getAttribute("invoiceList");
                         if (invoiceList != null) {
@@ -130,27 +130,27 @@
                     <tr>
                         <td><%= i.getInvoiceId() %></td>
                         <td><%= i.getUserId() != null ? i.getUserId() : "Khách" %></td>
-                        <td><%= i.getBookingId() %></td>
-                        <td><%= i.getFullName() != null ? i.getFullName() : "-" %></td>
-                        <td><%= i.getPhoneNumber() != null ? i.getPhoneNumber() : "-" %></td>
+                        <td><%= i.getServiceName() %></td>
+                        <td><%= i.getFullName()  %></td>
+                        <td><%= i.getPhoneNumber()  %></td>
                         <td><%= i.getTotalAmount() %></td>
                         <td><%= sdf.format(i.getPaymentDate()) %></td>
                         <td><%= i.getStatus() %></td>
                         <td>
-                           <button class="btn btn-sm btn-warning"
-    onclick="showEditModal(
-        <%= i.getInvoiceId() %>,
-       '<%= i.getUserId() != null ? i.getUserId() : "" %>',
-         <%= i.getBookingId() != null ? i.getBookingId() : 0 %>,
-        <%= i.getTotalAmount() %>,
-        '<%= sdf.format(i.getPaymentDate()) %>',
-        '<%= i.getStatus() %>',
-        '<%= i.getFullName() %>',
-        '<%= i.getPhoneNumber() %>',
-        <%= i.getServiceId() %>
-    )">
-    Sửa
-</button>
+                            <button class="btn btn-info btn-sm text-white"
+                                    onclick="showEditModal(
+                                    <%= i.getInvoiceId() %>,
+                                                    '<%= i.getUserId() != null ? i.getUserId() : "" %>',
+                                    <%= i.getBookingId() != null ? i.getBookingId() : 0 %>,
+                                    <%= i.getTotalAmount() %>,
+                                                    '<%= sdf.format(i.getPaymentDate()) %>',
+                                                    '<%= i.getStatus() %>',
+                                                    '<%= i.getFullName() %>',
+                                                    '<%= i.getPhoneNumber() %>',
+                                    <%= i.getServiceId() %>
+                                            )">
+                                Sửa
+                            </button>
 
                             <a href="delete-invoice?id=<%= i.getInvoiceId() %>"
                                onclick="return confirm('Bạn có chắc chắn xoá?')"
@@ -162,15 +162,17 @@
             </table>
         </div>
 
-        <!-- Modal Thêm -->
+        <!-- Add Invoice Modal -->
         <div class="modal fade" id="addModal" tabindex="-1">
             <div class="modal-dialog">
                 <form method="post" action="add-invoice" class="modal-content">
-                    <div class="modal-header"><h5 class="modal-title">Thêm hóa đơn</h5></div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Invoice</h5>
+                    </div>
                     <div class="modal-body">
-                        <label>Người dùng:</label>
+                        <label>User:</label>
                         <select name="userId" id="userSelect" class="form-control mb-2" onchange="toggleGuestFields()">
-                            <option value="">Không có tài khoản</option>
+                            <option value="">No account</option>
                             <% if (users != null) {
                                 for (User u : users) {
                             %>
@@ -181,43 +183,123 @@
                         </select>
 
                         <div id="guestFields">
-                            <label>Họ tên:</label>
-                            <input type="text" name="fullName" class="form-control mb-2"/>
-                            <label>Số điện thoại:</label>
-                            <input type="text" name="phoneNumber" class="form-control mb-2"/>
-                             <label>Chọn dịch vụ:</label>
-    <select name="serviceIds" class="form-control mb-2" multiple>
-        <%  List<MaintenanceService> services = (List<MaintenanceService>) request.getAttribute("services");
-            if (services != null) {
-                        for (MaintenanceService service : services) { %>
-            <option value="<%= service.getServiceId() %>"><%= service.getServiceName() %></option>
-        <% }} %>
-    </select>
+                            <label>Full Name:</label>
+                            <input type="text" name="fullName" class="form-control mb-2" placeholder="Enter full name" />
+
+                            <label>Phone Number:</label>
+                            <input type="text" name="phoneNumber" class="form-control mb-2" placeholder="Enter phone number" />
+
+                            <label>Select Services:</label>
+                            <select name="serviceIds" class="form-control mb-2">
+                                <option value="">-- Chọn dịch vụ --</option>
+                                <% 
+                                    List<MaintenanceService> services = (List<MaintenanceService>) request.getAttribute("services");
+                                    if (services != null) {
+                                        for (MaintenanceService service : services) { 
+                                %>
+                                <option value="<%= service.getServiceId() %>">
+                                    <%= service.getServiceName() %>
+                                </option>
+                                <% 
+                                        }
+                                    } 
+                                %>
+                            </select>
+
                         </div>
 
-                        <div id="bookingField"  style="display: none;">
-    <label>Booking:</label>
-    <select name="bookingId"  class="form-control mb-2">
-        <% List<MaintenanceBooking> bookings = (List<MaintenanceBooking>) request.getAttribute("bookings");
-           if (bookings != null) {
-               for (MaintenanceBooking b : bookings) { %>
-            <option value="<%= b.getBookingId() %>"><%= b.getBookingId() %> - <%= b.getServiceName() %></option>
-        <% }} %>
-    </select>
-</div>
-                        <label>Tổng tiền:</label>
-                        <input type="number" name="totalAmount" step="0.01" class="form-control mb-2" required/>
-                        <label>Ngày thanh toán:</label>
-                        <input type="date" name="paymentDate" class="form-control mb-2" required/>
-                        <label>Trạng thái:</label>
-                        <select name="status" class="form-control mb-2">
-    <option value="completed">Đã thanh toán</option>
-    <option value="unpaid">Chưa thanh toán</option>
-</select>
+                        <div id="bookingField" style="display: none;">
+                            <label>Booking:</label>
+                            <select name="bookingId" class="form-control mb-2">
+                                <option value="">-- Chọn booking --</option>
+                                <!-- Sẽ được điền bằng JS -->
+                            </select>
+                        </div>
 
+
+                        <label>Total Amount:</label>
+                        <input type="number" name="totalAmount" step="0.01" class="form-control mb-2" required placeholder="Enter total amount" />
+
+                        <label>Payment Date:</label>
+                        <input type="date" name="paymentDate" class="form-control mb-2" required />
+
+                        <label>Status:</label>
+                        <select name="status" class="form-control mb-2">
+                            <option value="completed">Paid</option>
+                            <option value="unpaid">Unpaid</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Thêm</button>
+                        <button class="btn btn-primary" type="submit">Add</button>
+                        <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <!-- Modal Sửa -->
+        <div class="modal fade" id="editModal" tabindex="-1">
+            <div class="modal-dialog">
+                <form method="post" action="edit-invoice" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sửa hóa đơn</h5>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="invoiceId" id="editId"/>
+
+                        <!-- Select Người dùng (ẩn nếu là khách) -->
+                        <div id="editUserSelectWrapper">
+                            <label>Người dùng:</label>
+                            <select name="userId" id="editUserId" class="form-control mb-2" onchange="toggleEditFields()">
+                                <option value="">Không có tài khoản</option>
+                                <% if (users != null) {
+                            for (User u : users) { %>
+                                <option value="<%= u.getUserId() %>">
+                                    <%= u.getUserId() %> - <%= u.getFullName() %>
+                                </option>
+                                <% }} %>
+                            </select>
+                        </div>
+
+                        <!-- Trường cho khách lẻ -->
+                        <div id="editGuestFields">
+                            <label>Họ tên:</label>
+                            <input type="text" name="fullName" id="editFullName" class="form-control mb-2"/>
+                            <label>SĐT:</label>
+                            <input type="text" name="phoneNumber" id="editPhoneNumber" class="form-control mb-2"/>
+
+                            <label>Dịch vụ:</label>
+                            <select name="serviceId" id="editServiceId" class="form-control mb-2">
+                                <% if (services != null) {
+           for (MaintenanceService s : services) { %>
+                                <option value="<%= s.getServiceId() %>"><%= s.getServiceName() %></option>
+                                <% }} %>
+                            </select>
+
+                        </div>
+
+                        <!-- Trường cho người dùng có tài khoản -->
+                        <div id="editBookingField">
+                            <label>Booking ID:</label>
+                            <input type="number" name="bookingId" id="editBookingId" class="form-control mb-2"/>
+                        </div>
+
+                        <label>Tổng tiền:</label>
+                        <input type="number" name="totalAmount" step="0.01" id="editTotal" class="form-control mb-2" required/>
+
+                        <label>Ngày thanh toán:</label>
+                        <input type="date" name="paymentDate" id="editDate" class="form-control mb-2" required/>
+
+                        <label>Trạng thái:</label>
+                        <select name="status" id="editStatus" class="form-control mb-2">
+                            <option value="completed">Đã thanh toán</option>
+                            <option value="unpaid">Chưa thanh toán</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" type="submit">Cập nhật</button>
                         <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     </div>
                 </form>
@@ -225,128 +307,110 @@
         </div>
 
 
-      <!-- Modal Sửa -->
-<div class="modal fade" id="editModal" tabindex="-1">
-    <div class="modal-dialog">
-        <form method="post" action="edit-invoice" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Sửa hóa đơn</h5>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" name="invoiceId" id="editId"/>
-
-                <!-- Select Người dùng (ẩn nếu là khách) -->
-                <div id="editUserSelectWrapper">
-                    <label>Người dùng:</label>
-                    <select name="userId" id="editUserId" class="form-control mb-2" onchange="toggleEditFields()">
-                        <option value="">Không có tài khoản</option>
-                        <% if (users != null) {
-                            for (User u : users) { %>
-                            <option value="<%= u.getUserId() %>">
-                                <%= u.getUserId() %> - <%= u.getFullName() %>
-                            </option>
-                        <% }} %>
-                    </select>
-                </div>
-
-                <!-- Trường cho khách lẻ -->
-                <div id="editGuestFields">
-                    <label>Họ tên:</label>
-                    <input type="text" name="fullName" id="editFullName" class="form-control mb-2"/>
-                    <label>SĐT:</label>
-                    <input type="text" name="phoneNumber" id="editPhoneNumber" class="form-control mb-2"/>
-
-                 <label>Dịch vụ:</label>
-<select name="serviceId" id="editServiceId" class="form-control mb-2">
-    <% if (services != null) {
-           for (MaintenanceService s : services) { %>
-        <option value="<%= s.getServiceId() %>"><%= s.getServiceName() %></option>
-    <% }} %>
-</select>
-
-                </div>
-
-                <!-- Trường cho người dùng có tài khoản -->
-                <div id="editBookingField">
-                    <label>Booking ID:</label>
-                    <input type="number" name="bookingId" id="editBookingId" class="form-control mb-2"/>
-                </div>
-
-                <label>Tổng tiền:</label>
-                <input type="number" name="totalAmount" step="0.01" id="editTotal" class="form-control mb-2" required/>
-
-                <label>Ngày thanh toán:</label>
-                <input type="date" name="paymentDate" id="editDate" class="form-control mb-2" required/>
-
-                <label>Trạng thái:</label>
-                <select name="status" id="editStatus" class="form-control mb-2">
-                    <option value="completed">Đã thanh toán</option>
-                    <option value="unpaid">Chưa thanh toán</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-warning" type="submit">Cập nhật</button>
-                <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-
-
         <!-- Script Sửa -->
         <script>
-            function toggleGuestFields() {
-                const selectedValue = document.getElementById("userSelect").value;
-                const guestFields = document.getElementById("guestFields");
-                 const bookingField = document.getElementById("bookingField");
-                if (selectedValue === "") {
-                    guestFields.style.display = "block";
-                     bookingField.style.display = "none";
+            const allBookings = [
+            <%
+                List<model.MaintenanceBooking> allBookings = (List<model.MaintenanceBooking>) request.getAttribute("allBookings");
+                if (allBookings != null && !allBookings.isEmpty()) {
+                    for (int i = 0; i < allBookings.size(); i++) {
+                        model.MaintenanceBooking booking = allBookings.get(i);
+            %>
+                        {
+                            bookingId: <%= booking.getBookingId() %>,
+                            userId: <%= booking.getUserId() %>,
+                            serviceName: "<%= booking.getServiceName() %>",
+                            scheduledTime: "<%= booking.getScheduledTime() %>"
+                        }<%= (i < allBookings.size() - 1) ? "," : "" %>
+            <%
+                    }
+                }
+            %>
+        ];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gọi hàm khi trang web tải xong để thiết lập trạng thái ban đầu
+            toggleGuestFields();
+        });
+
+        function toggleGuestFields() {
+            var userSelect = document.getElementById("userSelect");
+            var guestFields = document.getElementById("guestFields");
+            var bookingField = document.getElementById("bookingField");
+            
+            const bookingSelect = document.querySelector("select[name='bookingId']");
+            
+            if (userSelect.value === "") {
+                // Nếu không có người dùng nào được chọn, hiển thị trường khách và ẩn trường booking
+                guestFields.style.display = "block";
+                bookingField.style.display = "none";
+                bookingSelect.innerHTML = "<option value=''>-- Chọn booking --</option>";
+            } else {
+                // Nếu có người dùng, ẩn trường khách và hiển thị trường booking
+                guestFields.style.display = "none";
+                bookingField.style.display = "block";
+                
+                // Lọc danh sách booking dựa trên userId đã chọn
+                const selectedUserId = parseInt(userSelect.value);
+                const filteredBookings = allBookings.filter(booking => booking.userId === selectedUserId);
+
+                // Xóa các tùy chọn cũ
+                bookingSelect.innerHTML = "<option value=''>-- Chọn booking --</option>";
+                
+                if (filteredBookings.length === 0) {
+                    const option = document.createElement("option");
+                    option.text = "Không có booking nào";
+                    option.disabled = true;
+                    option.selected = true;
+                    bookingSelect.appendChild(option);
                 } else {
-                    guestFields.style.display = "none";
-                     bookingField.style.display = "block";
+                    filteredBookings.forEach(booking => {
+                        const option = document.createElement("option");
+                        option.value = booking.bookingId;
+                        option.text = booking.bookingId + " - " + booking.serviceName + " - " + booking.scheduledTime;
+                        bookingSelect.appendChild(option);
+                    });
                 }
             }
+        }
 
             // Khi tải lại modal
             $(document).ready(function () {
                 toggleGuestFields();
             });
-            
+
             function toggleEditFields() {
-        const userId = document.getElementById("editUserId").value;
-        const guestFields = document.getElementById("editGuestFields");
-        const bookingField = document.getElementById("editBookingField");
+                const userId = document.getElementById("editUserId").value;
+                const guestFields = document.getElementById("editGuestFields");
+                const bookingField = document.getElementById("editBookingField");
 
-        if (userId === "") {
-            guestFields.style.display = "block";
-            bookingField.style.display = "none";
-        } else {
-            guestFields.style.display = "none";
-            bookingField.style.display = "block";
-        }
-    }
+                if (userId === "") {
+                    guestFields.style.display = "block";
+                    bookingField.style.display = "none";
+                } else {
+                    guestFields.style.display = "none";
+                    bookingField.style.display = "block";
+                }
+            }
 
-    function showEditModal(id, userId, bookingId, total, date, status, fullName, phoneNumber, serviceId) {
-        $('#editId').val(id);
-        $('#editUserId').val(userId || "");
+            function showEditModal(id, userId, bookingId, total, date, status, fullName, phoneNumber, serviceId) {
+                $('#editId').val(id);
+                $('#editUserId').val(userId || "");
 
-        // Set giá trị userId trước khi gọi toggle
-        toggleEditFields();
+                // Set giá trị userId trước khi gọi toggle
+                toggleEditFields();
 
-        $('#editBookingId').val(bookingId || "");
-        $('#editTotal').val(total);
-        $('#editDate').val(date);
-        $('#editStatus').val(status);
+                $('#editBookingId').val(bookingId || "");
+                $('#editTotal').val(total);
+                $('#editDate').val(date);
+                $('#editStatus').val(status);
 
-        $('#editFullName').val(fullName || "");
-        $('#editPhoneNumber').val(phoneNumber || "");
-        $('#editServiceId').val(serviceId || "");
+                $('#editFullName').val(fullName || "");
+                $('#editPhoneNumber').val(phoneNumber || "");
+                $('#editServiceId').val(serviceId || "");
 
-        $('#editModal').modal('show');
-    }
+                $('#editModal').modal('show');
+            }
         </script>
 
         <!-- Script SweetAlert2 -->

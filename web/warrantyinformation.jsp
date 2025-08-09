@@ -30,6 +30,17 @@
                 margin-top: 40px;
                 color: #222;
             }
+            .book-button {
+            background-color: #146EF5;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
             .service-button {
                 display: inline-block;
@@ -295,13 +306,13 @@
                     <div class="dropdown-content">
                         <a href="<%=contextPath%>/warrantyinformation.jsp">Thông tin bảo hành</a>
                         <a href="<%=contextPath%>/maintenance">Thông tin bảo dưỡng định kỳ</a>
-                        <a href="<%=contextPath%>/services">Thông tin dịch vụ</a>
+                        
                     </div>
                 </div>
                 <div class="dropdown">
                     <a href="<%=contextPath%>/charging">Pin và trạm sạc</a>
                     <div class="dropdown-content">
-                        <a href="<%=contextPath%>/charging-stations">Trạm sạc ô tô điện</a>
+                        <a href="<%=contextPath%>/charging_station.jsp">Trạm sạc ô tô điện</a>
                     </div>
                 </div>
             </div>
@@ -330,7 +341,9 @@
 
         <div class="section-title">Bảo hành - sửa chữa</div>
 
-        <a href="datlich.jsp" class="service-button">ĐẶT LỊCH DỊCH VỤ</a>
+        <a href="/VinfastSystem/maintenance-booking">
+        <button class="book-button">ĐẶT LỊCH DỊCH VỤ</button>
+    </a>
 
         <img class="service-image" src="https://static-cms-prod.vinfastauto.com/baohanh_1656867400_1658395630.png" alt="Ảnh bảo hành - sửa chữa">
         <div class="warranty-section">

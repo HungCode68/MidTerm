@@ -24,11 +24,11 @@
 
     </head>
     <body >
-        
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+
+       <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
     <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold" href="#">
-            <i class="fas fa-tools mr-1"></i> Trang quản lý
+        <a class="navbar-brand font-weight-bold text-white" href="#">
+            <i class="fas fa-tools mr-1"></i> Management Page
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,40 +38,40 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Quản lý tài khoản</a>
+                    <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Quản lý xe</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Quản lý tư vấn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Đăng ký lái thử</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Đặt cọc</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Dịch vụ bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Đặt lịch bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Quản lý cửa hàng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Hóa đơn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Thống kê</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
                 </li>
             </ul>
 
-            <span class="navbar-text ml-auto text-light">
+            <span class="navbar-text ml-auto text-white">
                 <i class="fas fa-user-circle mr-1"></i>
-                Xin chào, <strong><%= currentUser.getFullName() %></strong>
+                Hello, <strong><%= currentUser.getFullName() %></strong>
             </span>
         </div>
     </div>
@@ -87,11 +87,13 @@
 
 
         <!-- Nút Thêm -->
-        <a href="dashboard-maintenance-services?showAdd=true" class="btn btn-success mb-3">+ Thêm dịch vụ</a>
+        <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
+            + Thêm dịch vụ
+        </button>
 
         <!-- Bảng -->
-        <table class="table table-bordered table-hover">
-            <thead class="table-dark">
+        <table class="table table-bordered table-striped">
+            <thead class="bg-white text-dark text-center">
                 <tr>
                     <th>ID</th>
                     <th>Tên dịch vụ</th>
@@ -112,7 +114,7 @@
                     <td><%= service.getDescription() %></td>
                     <td><%= service.getPrice() %></td>
                     <td>
-                        <a href="edit-maintenance-service?id=<%= service.getServiceId() %>" class="btn btn-primary btn-sm">Sửa</a>
+                        <a href="edit-maintenance-service?id=<%= service.getServiceId() %>" class="btn btn-info btn-sm text-white">Sửa</a>
                         <a href="delete-maintenance-service?id=<%= service.getServiceId() %>" class="btn btn-danger btn-sm"
                            onclick="return confirm('Bạn có chắc muốn xoá?')">Xoá</a>
                     </td>
@@ -124,57 +126,53 @@
             </tbody>
         </table>
 
-        <!-- Modal Thêm -->
-        <%
-            String showAdd = request.getParameter("showAdd");
-            if ("true".equals(showAdd)) {
-        %>
-        <div class="modal show d-block" tabindex="-1">
-            <div class="modal-dialog">
-                <form action="add-maintenance-service" method="post">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Thêm dịch vụ</h5>
-                            <a href="dashboard-maintenance-services" class="btn-close"></a>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label class="form-label">Tên dịch vụ:</label>
-                                <input type="text" name="serviceName" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Mô tả:</label>
-                                <textarea name="description" class="form-control" rows="3"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Giá:</label>
-                                <input type="number" name="price" class="form-control" step="1000" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Lưu</button>
-                            <a href="dashboard-maintenance-services" class="btn btn-secondary">Huỷ</a>
-                        </div>
+       <!-- Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="add-maintenance-service" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add Service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Service Name:</label>
+                        <input type="text" name="serviceName" class="form-control" placeholder="Enter service name" required>
                     </div>
-                </form>
+                    <div class="mb-3">
+                        <label class="form-label">Description:</label>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Enter description"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price:</label>
+                        <input type="number" name="price" class="form-control" step="1000" placeholder="Enter price" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
             </div>
-        </div>
-        <%
-            }
-        %>
+        </form>
+    </div>
+</div>
+
 
         <!-- Modal Sửa -->
         <%
-            MaintenanceService editService = (MaintenanceService) request.getAttribute("editService");
-            if (editService != null) {
+     MaintenanceService editService = (MaintenanceService) request.getAttribute("editService");
+     boolean showEditModal = editService != null;
+     if (showEditModal) {
         %>
-        <div class="modal show d-block" tabindex="-1">
+        <!-- Modal Sửa -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="edit-maintenance-service" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Sửa dịch vụ</h5>
-                            <a href="dashboard-maintenance-services" class="btn-close"></a>
+                            <h5 class="modal-title" id="editModalLabel">Sửa dịch vụ</h5>
+                            <a href="dashboard-maintenance-services" class="btn-close" aria-label="Close"></a>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="serviceId" value="<%= editService.getServiceId() %>">
@@ -199,28 +197,44 @@
                 </form>
             </div>
         </div>
+
         <%
             }
         %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            <% if (message != null) { %>
-        Swal.fire({
-            icon: 'success',
-            title: 'Thành công!',
-            text: '<%= message %>',
-            timer: 2500,
-            showConfirmButton: false
-        });
-            <% } else if (error != null) { %>
-        Swal.fire({
-            icon: 'error',
-            title: 'Lỗi!',
-            text: '<%= error %>',
-            confirmButtonText: 'OK'
-        });
+            <% if (showEditModal) { %>
+                               const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+                               window.onload = function () {
+                                   editModal.show();
+                               };
+            <% } %>
+
+            <%
+     if (message != null) {
+         // Thay thế các ký tự đặc biệt để tránh lỗi JavaScript
+         String escapedMessage = message.replace("'", "\\'");
+            %>
+                               Swal.fire({
+                                   icon: 'success',
+                                   title: 'Thành công!',
+                                   text: '<%= escapedMessage %>',
+                                   timer: 2500,
+                                   showConfirmButton: false
+                               });
+            <% } else if (error != null) {
+                // Thay thế các ký tự đặc biệt cho thông báo lỗi
+                String escapedError = error.replace("'", "\\'");
+            %>
+                               Swal.fire({
+                                   icon: 'error',
+                                   title: 'Lỗi!',
+                                   text: '<%= escapedError %>',
+                                   confirmButtonText: 'OK'
+                               });
             <% } %>
         </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     </body>
 </html>

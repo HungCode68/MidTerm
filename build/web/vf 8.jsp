@@ -5,9 +5,12 @@
 --%>
 
 <%@ page import="model.Car" %>
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Car car = (Car) request.getAttribute("car");
+     User currentUser = (User) session.getAttribute("currentUser");
+    String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -348,40 +351,56 @@
         </style>
     </head>
     <body>
-        <div class="navbar">
+         <div class="navbar">
             <div class="navbar-left">
                 <img src="https://vinfastauto.com/themes/porto/img/new-home-page/VinFast-logo.svg" alt="VinFast Logo">
-                <a href="index.html">Giới thiệu</a>
+                <a href="<%=contextPath%>/#">Giới thiệu</a>
                 <div class="dropdown">
-                    <a href="#">Ô tô</a>
+                    <a href="<%=contextPath%>/cars">Ô tô</a>
                     <div class="dropdown-content">
-                        <a href="#">VF 5</a>
-                        <a href="#">VF 6</a>
-                        <a href="#">VF 7</a>
-                        <a href="#">VF 8</a>
-                        <a href="#">VF 9</a>
+                        <a href="<%=contextPath%>/cars?model=VF%205">VF 5</a>
+                        <a href="<%=contextPath%>/cars?model=VF%206">VF 6</a>
+                        <a href="<%=contextPath%>/cars?model=VF%207">VF 7</a>
+                        <a href="<%=contextPath%>/cars?model=VF%208">VF 8</a>
+                        <a href="<%=contextPath%>/cars?model=VF%209">VF 9</a>
+
                     </div>
                 </div>
                 <div class="dropdown">
-                    <a href="#">Dịch vụ hậu mãi</a>
+                    <a href="<%=contextPath%>/#">Dịch vụ hậu mãi</a>
                     <div class="dropdown-content">
-                        <a href="#">Thông tin bảo hành</a>
-                        <a href="#">Thông tin bảo dưỡng định kỳ</a>
-                        <a href="#">Thông tin dịch vụ</a>
+                        <a href="<%=contextPath%>/warrantyinformation.jsp">Thông tin bảo hành</a>
+                        <a href="<%=contextPath%>/maintenance">Thông tin bảo dưỡng định kỳ</a>
+                        
                     </div>
                 </div>
                 <div class="dropdown">
-                    <a href="#">Pin và trạm sạc</a>
+                    <a href="<%=contextPath%>/#">Pin và trạm sạc</a>
                     <div class="dropdown-content">
-                        <a href="#">Trạm sạc ô tô điện</a>
+                       <a href="<%=contextPath%>/charging_station.jsp">Trạm sạc ô tô điện</a>
                     </div>
                 </div>
             </div>
             <div class="navbar-right">
+                <% if (currentUser != null) { %>
+                <!-- Nếu đã đăng nhập, hiển thị icon người và tên người dùng -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="dropdown">
+                        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" style="width: 30px; height: 30px; border-radius: 50%;">
+                        <span>Xin chào, <%= currentUser.getFullName() %></span>
+                        <div class="dropdown-content">
+                            <a href="/VinfastSystem/profile">Thông tin cá nhân</a>
+                            <a href="logout.jsp"">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+
                 <a href="login.jsp" style="color: blue">Đăng Nhập /</a>
                 <a href="register.jsp" style="color: blue">Đăng Ký</a>
+                <% } %>
 
-                <a href="register.html" class="btn-primary">ĐĂNG KÝ LÁI THỬ</a>
+                <a href="<%=contextPath%>/cars" class="btn-primary">ĐĂNG KÝ LÁI THỬ</a>
             </div>
         </div>
 
@@ -523,24 +542,26 @@
             <div class="section-title">VF 8 series mới</div>
             <div class="version-list">
                 <div class="version-box">
-                    <h3>VF 8 Eco</h3>
+                    <h3><%=car.getModelName()%> Eco</h3>
                     <img src="https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw2f635011/reserves/VF8/vf8eco.webp" alt="VF 8 Eco">
-                    <div class="price">1.019.000.000 VNĐ</div>
+                    <div class="price"><%= String.format("%,.0f", car.getPrice()) %> VNĐ</div>
                     <div class="btn-group">
                         <a href="cars?model=VF%208&action=deposit">
                             <button class="btn-datcoc">ĐẶT CỌC</button>
                         </a>
+                        <a href="<%=contextPath%>/cars" style="text-decoration: none;">ĐĂNG KÝ LÁI THỬ</a>
 
-                        <button class="btn-laithu">ĐĂNG KÝ LÁI THỬ</button>
                     </div>
                 </div>
                 <div class="version-box">
-                    <h3>VF 8 Plus</h3>
+                    <h3><%=car.getModelName()%> Plus</h3>
                     <img src="https://shop.vinfastauto.com/on/demandware.static/-/Sites-app_vinfast_vn-Library/default/dw1f936f89/reserves/VF8/vf8plus.webp" alt="VF 8 Plus">
-                    <div class="price">1.199.000.000 VNĐ</div>
+                    <div class="price"><%= String.format("%,.0f", car.getPrice()) %> VNĐ</div>
                     <div class="btn-group">
+                        <a href="cars?model=VF%208&action=deposit">
                         <button class="btn-datcoc">ĐẶT CỌC</button>
-                        <button class="btn-laithu">ĐĂNG KÝ LÁI THỬ</button>
+                        </a>
+                        <a href="<%=contextPath%>/cars" style="text-decoration: none;">ĐĂNG KÝ LÁI THỬ</a>
                     </div>
                 </div>
             </div>
@@ -562,12 +583,12 @@
                     %>
                 </table>
             </div>
- <br>
-    <a href="/VinfastSystem/consultations"
-       style="display: inline-block; margin-top: 25px; padding: 12px 25px; font-size: 16px; font-weight: bold;
-              background-color: #ff6600; color: white; border-radius: 5px; text-decoration: none;">
-        Đăng ký tư vấn
-    </a>
+            <br>
+            <a href="/VinfastSystem/consultations"
+               style="display: inline-block; margin-top: 25px; padding: 12px 25px; font-size: 16px; font-weight: bold;
+               background-color: #ff6600; color: white; border-radius: 5px; text-decoration: none;">
+                Đăng ký tư vấn
+            </a>
 
 
         </div>

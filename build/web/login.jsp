@@ -160,7 +160,7 @@
                     <div class="dropdown-content">
                         <a href="#">Thông tin bảo hành</a>
                         <a href="#">Thông tin bảo dưỡng định kỳ</a>
-                        <a href="#">Thông tin dịch vụ</a>
+                        
                     </div>
                 </div>
                 <div class="dropdown">

@@ -1,27 +1,28 @@
 <%-- 
-    Document   : index
-    Created on : Jun 9, 2025, 10:00:49 PM
+    Document   : charging_station
+    Created on : Aug 9, 2025, 11:20:18 AM
     Author     : Nguyễn Hùng
 --%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="model.User" %>
+
 <%
     User currentUser = (User) session.getAttribute("currentUser");
     String contextPath = request.getContextPath();
 %>
 <!DOCTYPE html>
-<html lang="vi">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>VinFast - Trang chủ</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <style>
             body {
+                font-family: Arial, sans-serif;
                 margin: 0;
-                font-family: 'Segoe UI', sans-serif;
+                padding: 0;
+                background: #f5f5f5;
             }
-
             /* Navbar */
             .navbar {
                 display: flex;
@@ -72,16 +73,37 @@
                 text-decoration: none;
             }
 
-            .hero {
-                width: 100%;
-                height: auto;
-                overflow: hidden;
+            /* Dropdown menu */
+            .dropdown {
+                position: relative;
             }
 
-            .hero img {
-                width: 100%;
-                max-height: 650px;
-                object-fit: cover;
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: white;
+                min-width: 160px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                z-index: 1;
+                top: 100%;
+                left: 0;
+                padding: 10px 0;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 8px 16px;
+                text-decoration: none;
+                display: block;
+                white-space: nowrap;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #f0f0f0;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
             }
 
             /* Footer */
@@ -165,43 +187,9 @@
                     max-width: 100%;
                 }
             }
-
-            /* Dropdown menu */
-            .dropdown {
-                position: relative;
-            }
-
-            .dropdown-content {
-                display: none;
-                position: absolute;
-                background-color: white;
-                min-width: 160px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-                z-index: 1;
-                top: 100%;
-                left: 0;
-                padding: 10px 0;
-            }
-
-            .dropdown-content a {
-                color: black;
-                padding: 8px 16px;
-                text-decoration: none;
-                display: block;
-                white-space: nowrap;
-            }
-
-            .dropdown-content a:hover {
-                background-color: #f0f0f0;
-            }
-
-            .dropdown:hover .dropdown-content {
-                display: block;
-            }
         </style>
     </head>
     <body>
-
         <!-- Navbar -->
         <div class="navbar">
             <div class="navbar-left">
@@ -223,10 +211,11 @@
                     <div class="dropdown-content">
                         <a href="<%=contextPath%>/warrantyinformation.jsp">Thông tin bảo hành</a>
                         <a href="<%=contextPath%>/maintenance">Thông tin bảo dưỡng định kỳ</a>
+
                     </div>
                 </div>
                 <div class="dropdown">
-                    <a href="<%=contextPath%>/#">Pin và trạm sạc</a>
+                    <a href="<%=contextPath%>/charging_station.jsp">Pin và trạm sạc</a>
                     <div class="dropdown-content">
                         <a href="<%=contextPath%>/charging_station.jsp">Trạm sạc ô tô điện</a>
                     </div>
@@ -246,7 +235,7 @@
                     </div>
                 </div>
                 <% } else { %>
-               
+
                 <a href="login.jsp" style="color: blue">Đăng Nhập /</a>
                 <a href="register.jsp" style="color: blue">Đăng Ký</a>
                 <% } %>
@@ -255,9 +244,61 @@
             </div>
         </div>
 
-        <!-- Hero Section -->
-        <div class="hero">
-            <img src="https://static-cms-prod.vinfastauto.com/banner-vf8-20250529.webp" alt="VinFast Banner">
+
+        <!-- Main content -->
+        <div style="padding: 40px; background-color: white; max-width: 1200px; margin: auto;">
+            <!-- Title -->
+            <h2 style="text-align: center; font-size: 28px; margin-bottom: 8px;">VinFast Charging Station Planning</h2>
+            <p style="text-align: center; max-width: 800px; margin: auto; color: #555;">
+                VinFast charging stations for electric cars and motorbikes can be installed in existing parking areas without changing their primary function.
+                The charging equipment is manufactured by VinFast, featuring a modern, attractive design, meeting European standards, and ensuring electrical safety.
+            </p>
+
+            <!-- Location list -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px;">
+                <div style="background: #f5f5f5; padding: 12px 20px; border-radius: 4px; display: flex; align-items: center; gap: 8px;">
+                    <span>🚗</span> Parking lot / Bus station
+                </div>
+                <div style="background: #f5f5f5; padding: 12px 20px; border-radius: 4px; display: flex; align-items: center; gap: 8px;">
+                    <span>⛽</span> Rest stop / Gas station
+                </div>
+                <div style="background: #f5f5f5; padding: 12px 20px; border-radius: 4px; display: flex; align-items: center; gap: 8px;">
+                    <span>🏢</span> Shopping mall
+                </div>
+                <div style="background: #f5f5f5; padding: 12px 20px; border-radius: 4px; display: flex; align-items: center; gap: 8px;">
+                    <span>🏬</span> Apartment building / Office tower
+                </div>
+                <div style="background: #f5f5f5; padding: 12px 20px; border-radius: 4px; display: flex; align-items: center; gap: 8px;">
+                    <span>🛣</span> Expressway / National highway
+                </div>
+                <div style="background: #f5f5f5; padding: 12px 20px; border-radius: 4px; display: flex; align-items: center; gap: 8px;">
+                    <span>📍</span> Other suitable locations
+                </div>
+            </div>
+
+            <!-- Image + Policy -->
+            <div style="display: flex; flex-wrap: wrap; gap: 32px; margin-top: 40px; align-items: flex-start;">
+                <!-- Image -->
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="https://storage.googleapis.com/vinfast-data-01/pin-tramsac-6_1660273722.png" alt="VinFast Charging Station" style="width: 100%; border-radius: 6px;">
+                </div>
+
+                <!-- Policy -->
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="margin-top: 0;">Battery Charging Policy</h3>
+                    <p>VinFast provides electric car and motorbike charging rates and payment methods applicable at public charging stations as follows:</p>
+                    <ul>
+                        <li>Charging rate: <strong>3,858 VND/kWh</strong> effective from March 19, 2024.</li>
+                        <li>Overtime charging penalty: <strong>1,000 VND/minute</strong> starting from the 31st minute after the battery is fully charged.</li>
+                    </ul>
+                    <p><strong>Payment method:</strong> Payment must be made before the 15th of the following month for all charging fees and overtime penalties incurred in the previous month.</p>
+                    <p><strong>Notes:</strong></p>
+                    <ul>
+                        <li>The above charging rate includes VAT.</li>
+                        <li>The rate applies from the effective date until further notice.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->

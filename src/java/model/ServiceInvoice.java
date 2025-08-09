@@ -20,6 +20,7 @@ public class ServiceInvoice {
     private String status;
     private String phoneNumber;
     private String fullName;
+    private String serviceName;
 
     // Constructors
     public ServiceInvoice() {
@@ -106,5 +107,13 @@ public class ServiceInvoice {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+    
+     public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 }

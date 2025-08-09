@@ -25,10 +25,10 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm" >
     <div class="container-fluid">
-        <a class="navbar-brand font-weight-bold" href="#">
-            <i class="fas fa-tools mr-1"></i> Trang quản lý
+        <a class="navbar-brand font-weight-bold text-white" href="#">
+            <i class="fas fa-tools mr-1"></i> Management Page
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,40 +38,40 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item <%= request.getServletPath().equals("/dashboard") ? "active" : "" %>">
-                    <a class="nav-link" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Quản lý tài khoản</a>
+                    <a class="nav-link text-white" href="dashboard"><i class="fas fa-user-cog mr-1"></i> Account Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Quản lý xe</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-cars"><i class="fas fa-car mr-1"></i> Car Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Quản lý tư vấn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-consultations"><i class="fas fa-comments mr-1"></i> Consultation</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Đăng ký lái thử</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-testdrives"><i class="fas fa-road mr-1"></i> Test Drive</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Đặt cọc</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-deposits"><i class="fas fa-file-invoice-dollar mr-1"></i> Deposits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Dịch vụ bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-maintenance-services"><i class="fas fa-tools mr-1"></i> Maintenance Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Đặt lịch bảo dưỡng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-bookings"><i class="fas fa-calendar-check mr-1"></i> Maintenance Bookings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Quản lý cửa hàng</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-showrooms"><i class="fas fa-store mr-1"></i> Showroom Management</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Hóa đơn</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/dashboard-invoices"><i class="fas fa-receipt mr-1"></i> Invoices</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Thống kê</a>
+                    <a class="nav-link text-white" href="/VinfastSystem/StatisticsManagementServlet"><i class="fas fa-chart-line mr-1"></i> Statistics</a>
                 </li>
             </ul>
 
-            <span class="navbar-text ml-auto text-light">
+            <span class="navbar-text ml-auto text-white">
                 <i class="fas fa-user-circle mr-1"></i>
-                Xin chào, <strong><%= currentUser.getFullName() %></strong>
+                Hello, <strong><%= currentUser.getFullName() %></strong>
             </span>
         </div>
     </div>
@@ -86,7 +86,7 @@
 
     <!-- Bảng danh sách showroom -->
     <table class="table table-bordered">
-        <thead class="table-dark">
+        <thead class="bg-white text-dark text-center">
         <tr>
             <th>ID</th>
             <th>Tên showroom</th>
@@ -110,7 +110,7 @@
             <td><%= s.getDistrict() %></td>
             <td>
                 <!-- Nút sửa -->
-                <button class="btn btn-sm btn-warning"
+                <button class="btn btn-info btn-sm text-white"
                         onclick="showEditModal('<%= s.getShowroomId() %>', '<%= s.getName() %>', '<%= s.getAddress() %>',
                             '<%= s.getProvince() %>', '<%= s.getDistrict() %>')">
                     Sửa
@@ -126,56 +126,65 @@
     </table>
 </div>
 
-<!-- Modal Thêm showroom -->
+<!-- Modal Add Showroom -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <form method="post" action="add-showroom" class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Thêm Showroom</h5>
+                <h5 class="modal-title">Add Showroom</h5>
             </div>
             <div class="modal-body">
-                <label>Tên showroom:</label>
-                <input type="text" name="name" class="form-control mb-2" required/>
-                <label>Địa chỉ:</label>
-                <input type="text" name="address" class="form-control mb-2" required/>
-                <label>Tỉnh:</label>
-                <input type="text" name="province" class="form-control mb-2" required/>
-                <label>Quận/Huyện:</label>
-                <input type="text" name="district" class="form-control mb-2" required/>
+                <label>Showroom Name:</label>
+                <input type="text" name="name" class="form-control mb-2" placeholder="Enter showroom name" required/>
+
+                <label>Address:</label>
+                <input type="text" name="address" class="form-control mb-2" placeholder="Enter address" required/>
+
+                <label>Province:</label>
+                <input type="text" name="province" class="form-control mb-2" placeholder="Enter province" required/>
+
+                <label>District:</label>
+                <input type="text" name="district" class="form-control mb-2" placeholder="Enter district" required/>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="submit">Thêm</button>
-                <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- Modal Sửa showroom -->
+
+<!-- Modal Edit Showroom -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <form method="post" action="edit-showroom" class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Sửa Showroom</h5>
+                <h5 class="modal-title">Edit Showroom</h5>
             </div>
             <div class="modal-body">
                 <input type="hidden" name="showroomId" id="editId"/>
-                <label>Tên showroom:</label>
+
+                <label>Showroom Name:</label>
                 <input type="text" name="name" id="editName" class="form-control mb-2" required/>
-                <label>Địa chỉ:</label>
+
+                <label>Address:</label>
                 <input type="text" name="address" id="editAddress" class="form-control mb-2" required/>
-                <label>Tỉnh:</label>
+
+                <label>Province:</label>
                 <input type="text" name="province" id="editProvince" class="form-control mb-2" required/>
-                <label>Quận/Huyện:</label>
+
+                <label>District:</label>
                 <input type="text" name="district" id="editDistrict" class="form-control mb-2" required/>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-warning" type="submit">Cập nhật</button>
-                <button class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button class="btn btn-warning" type="submit">Update</button>
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </form>
     </div>
 </div>
+
 
 <!-- Script để load dữ liệu vào modal sửa -->
 <script>
