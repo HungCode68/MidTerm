@@ -21,12 +21,7 @@ import model.MaintenanceService;
  *
  * @author Nguyễn Hùng
  */
-@WebServlet(name = "MaintenanceServicesManagementServlet",  urlPatterns = {
-        "/dashboard-maintenance-services", 
-        "/add-maintenance-service", 
-        "/edit-maintenance-service", 
-        "/delete-maintenance-service"
-    })
+@WebServlet(name = "MaintenanceServicesManagementServlet",  urlPatterns = { "/dashboard-maintenance-services", "/add-maintenance-service", "/edit-maintenance-service",  "/delete-maintenance-service"})
 public class MaintenanceServicesManagementServlet extends HttpServlet {
  private MaintenanceServiceDAO maintenanceServiceDAO;
     /**

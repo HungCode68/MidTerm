@@ -33,14 +33,7 @@ import model.User;
  *
  * @author Nguyễn Hùng
  */
-@WebServlet(name = "ServiceInvoiceManagementServlet", urlPatterns = {
-    "/dashboard-invoices", // danh sách
-    "/add-invoice", // thêm
-    "/edit-invoice", // sửa
-    "/delete-invoice", // xoá
-    "/filter-invoice"
-// lọc
-})
+@WebServlet(name = "ServiceInvoiceManagementServlet", urlPatterns = { "/dashboard-invoices", "/add-invoice", "/edit-invoice",  "/delete-invoice",  "/filter-invoice"})
 public class ServiceInvoiceManagementServlet extends HttpServlet {
 
     private  ServiceInvoiceDAO invoiceDAO = new ServiceInvoiceDAO();

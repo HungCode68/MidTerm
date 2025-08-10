@@ -28,10 +28,7 @@ import model.User;
  *
  * @author Nguyễn Hùng
  */
-@WebServlet(name = "MaintenanceBookingManagementServlet", urlPatterns = {"/dashboard-bookings",
-    "/add-booking",
-    "/edit-booking",
-    "/delete-booking"})
+@WebServlet(name = "MaintenanceBookingManagementServlet", urlPatterns = {"/dashboard-bookings","/add-booking","/edit-booking","/delete-booking"})
 public class MaintenanceBookingManagementServlet extends HttpServlet {
 
     private MaintenanceBookingDAO bookingDAO;

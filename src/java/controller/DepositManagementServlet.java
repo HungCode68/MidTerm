@@ -27,12 +27,7 @@ import model.User;
  *
  * @author Nguyễn Hùng
  */
-@WebServlet(name = "DepositManagementServlet", urlPatterns = {
-    "/dashboard-deposits",
-    "/add-deposit",
-    "/edit-deposit",
-    "/delete-deposit"
-})
+@WebServlet(name = "DepositManagementServlet", urlPatterns = {"/dashboard-deposits", "/add-deposit","/edit-deposit","/delete-deposit"})
 public class DepositManagementServlet extends HttpServlet {
 
     private DepositDAO depositDAO;

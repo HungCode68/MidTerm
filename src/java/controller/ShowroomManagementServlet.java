@@ -22,9 +22,7 @@ import model.Showroom;
  *
  * @author Nguyễn Hùng
  */
-@WebServlet(name = "ShowroomManagementServlet", urlPatterns = {
-        "/dashboard-showrooms", "/add-showroom", "/edit-showroom", "/delete-showroom"
-})
+@WebServlet(name = "ShowroomManagementServlet", urlPatterns = { "/dashboard-showrooms", "/add-showroom", "/edit-showroom", "/delete-showroom"})
 public class ShowroomManagementServlet extends HttpServlet {
 private ShowroomDAO showroomDAO;
     /**
